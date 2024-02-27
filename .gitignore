@@ -1,0 +1,12 @@
+# created by virtualenv automatically
+
+# Ignore log files
+*.log
+
+# Ignore temporary files
+temp/
+venv/
+
+# Ignore a specific file
+secret.txt
+

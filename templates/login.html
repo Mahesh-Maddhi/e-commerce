@@ -1,0 +1,23 @@
+{% extends "base.html" %} 
+{% load static %}
+
+{% block title %}User Login{% endblock title %} 
+{% block linktags %}<link href="{%static 'css/signup.css'%}" rel="stylesheet">{% endblock linktags %}
+{% block body%}
+<div class="login-page">
+  <div class="form">
+    <h1 class="heading">Ecommerce</h1>
+    <form class="login-form" method = "post">
+      {% csrf_token %}
+      <input type="text" placeholder="Username" name = "username" required />
+      <div class="password-container">
+        <input id= "password" type="password" placeholder="Password" name = "password" required/>
+        <i class="fa-solid fa-eye icon " id="eyeOpenIcon"></i><i class="fa-solid fa-eye-slash icon d-none" id="eyecloseIcon"></i>
+
+      </div>
+      <button type = "submit">login</button>
+      <p class="message">Don'tt Have an Account? <a href="/signup">Create an account</a></p>
+    </form>
+  </div>
+</div>
+{% endblock body %}
