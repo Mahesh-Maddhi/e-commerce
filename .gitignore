@@ -5,6 +5,8 @@
 
 # Ignore temporary files
 temp/
+
+# Ignore virtual evironment files
 venv/
 
 # Ignore a specific file
