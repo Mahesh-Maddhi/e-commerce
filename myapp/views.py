@@ -3,7 +3,7 @@ from django.contrib.auth import logout, authenticate, login
 from django.contrib import messages
 from django.contrib.auth.models import User
 from myapp.models import SignedUser, Contact
-
+import requests
 
 # Create your views here.
 
@@ -56,9 +56,16 @@ def user_logout(request):
     return redirect('/login')
 
 def home(request):
+    url = 'https://api.escuelajs.co/api/v1/products?limit=10'
+    products = requests.get(url)
+    products = products.json()
+    context={
+        "username":request.user.username,
+        "products":products
+    }
     
     if request.user.is_authenticated:
-        return render(request,'index.html',{"username":request.user.username})
+        return render(request,'index.html',context)
     return redirect('/login')
     
 

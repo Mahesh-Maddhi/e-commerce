@@ -76,11 +76,30 @@
         
       </nav>
     </header>
-    <main>
+    <main class="main-container">
         {% block main %}
-        this is home page{% endblock main %}
+
+        <div class="card-container">
+          {% for product in products %}
+          <div class="card">
+            <div class="product-images">
+            <img 
+            srcset="{{product.images.0}},{{product.images.1}},{{product.images.2}}"
+            src="{{product.images.0}}" alt="{{product.images.1}}" class="product-image" loadng="lazy">
+            </div>
+            <h4 class="product-title">{{product.title}}</h4>
+            <div>
+            <span class="product-price">$ {{product.price}}</span>
+            <span class="category"> * {{product.category.name}}</span>
+            </div>
+            <button class="btn btn-primary">Add to Cart</button>
+          </div>
+          {% endfor %}
+        </div>
+        
+        {% endblock main %}
       </main>
     <footer>
-
+      
     </footer>
 {% endblock body %}
