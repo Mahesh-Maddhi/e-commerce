@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	font-family: "poppins",system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
 }
 
 .messages {
@@ -9,9 +12,7 @@
 	padding-left: 0px;
 }
 
-/* --------------------------------------------------- */
 /* ------------------- Header ------------------------- */
-/* ----------------------------------------------------- */
 
 .logo {
 	width: 30px;
@@ -57,60 +58,88 @@
 	color: white;
 }
 
-/* ----------------------------------------- */
+.icon{
+	color: white;
+	font-size: 20px;
+	/* background-color: white; */
+}
+
 /* ---------------- Main ------------------- */
-/* ------------------------------------------- */
 
 .main-container {
 	/* background-color: rgb(255, 255, 255); */
 	min-height: 100vh;
     width: 100%;
+	font-family: "poppins";
 }
 
 .card-container {
     width: 100%;
 	display: flex;
 	flex-direction: row;
-	justify-content: center;
-	align-items: center;
+	/* justify-content: center;
+	align-items: center; */
     flex-wrap: wrap;
-	
+	padding: 20px;
 }
+.category-card{
+	width: 100%;
+	border-radius: 1rem;
+	background-image:url('https://i.imgur.com/QkIa5tT.jpeg');
+	background-size: cover;
+	background-position: center;
+	border: 2px solid red;
+	min-height: 300px;
+	
+	margin: 20px;
 
+}
+.category-name{
+	font-size: 20px;
+	font-weight: bold;
+	padding: 20px 0px 0px 20px;
+}
 .card-container .card {
     overflow: hidden;
-    width: 200px;
+    /* min-width: 200px;
+	max-width: 250px; */
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	padding: 4px 4px 10px;
-	margin: 20px 20px;
-	border: 12px;
+	margin: 20px 10px;
+	
 	box-shadow: 0px 0px 10px rgb(195, 195, 195);
-     
+     border-radius: 1rem;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
 	
 }
 
-/* .card-container .card:hover {
-    scale: 1.04;
-	
-} */
-.product-images:hover .product-image {
-    scale: 1.1;
+.card-container .card:hover {
+    scale: 1.02;
 	
 }
+/* .product-images:hover .product-image {
+    scale: 1.1;
+	
+} */
 
 .card .product-image {
 	width: 100%;
     aspect-ratio: 4/5;
     object-fit: cover;
+	border-radius: 1rem 1rem 0px 0px;
     /* mix-blend-mode:color-burn; */
    
     
 }
+.product-images{
+    overflow: hidden;
+    transition: all 0.5s ease;
+}
+
 .card .product-title {
     font-size: 20px;
 	white-space: nowrap;
@@ -124,7 +153,42 @@
     color: rgb(67, 67, 230);
     font-weight: bold;
 }
-.product-images{
-    overflow: hidden;
-    transition: all 0.5s ease;
+
+
+.primary-button{
+	margin: 5px;
+	padding: 4px 30px 4px 30px;
+	color: rgb(70, 70, 70);
+	outline:none;
+	border: 2px solid  rgb(70, 70, 70);
+	border-radius: 10px;
+	background-color: white;
+
+}
+
+.primary-button:hover {
+	outline:none;
+	background-color: rgb(70, 70, 70);
+	color: white;
+}
+.primary-button:focus{
+
+}
+
+.spinner{
+	height: 50px;
+	aspect-ratio: 1/1;
+	border: 4px solid black;
+	border-bottom-color: transparent;
+	border-radius: 50%;
+	animation: spinner .8s linear infinite;
+}
+
+@keyframes spinner{
+	0%{
+		transform: rotate(0deg);
+	}
+	100%{
+		transform: rotate(360deg);
+	}
 }

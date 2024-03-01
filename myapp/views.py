@@ -4,8 +4,18 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from myapp.models import SignedUser, Contact
 import requests
-
+import json
 # Create your views here.
+
+def get_data(url):
+     
+    response = requests.get(url)
+    if response.status_code == 200:
+        return response.json()
+    else:
+        return {"error occured while api fetch with status code":response.status_code}
+    
+
 
 def user_login(request):
     if request.user.is_authenticated:
@@ -56,12 +66,23 @@ def user_logout(request):
     return redirect('/login')
 
 def home(request):
-    url = 'https://api.escuelajs.co/api/v1/products?limit=10'
-    products = requests.get(url)
-    products = products.json()
+    
+    products = get_data('https://api.escuelajs.co/api/v1/products?offset=0&limit=10')
+    categories = get_data('https://api.escuelajs.co/api/v1/categories?limit=8')
+   
+    # to create clear links
+    for product in products:
+        links = []
+        for link in product['images']:
+            link= link.strip('["]')
+            links.append(link)
+        # print(links)
+        product['images'] = links
+   
     context={
         "username":request.user.username,
-        "products":products
+        "products":products,
+        "categories":categories
     }
     
     if request.user.is_authenticated:

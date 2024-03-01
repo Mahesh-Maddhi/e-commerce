@@ -1,5 +1,6 @@
+
 let eyeOpenIcon = document.getElementById("eyeOpenIcon");
-let eyeCloseIcon = document.getElementById("eyecloseIcon");
+let eyeCloseIcon = document.getElementById("eyeCloseIcon");
 let passwordEl = document.getElementById("password");
 
 eyeOpenIcon.onclick = ()=>{

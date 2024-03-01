@@ -10,5 +10,5 @@ temp/
 venv/
 
 # Ignore a specific file
-secret.txt
+
 
