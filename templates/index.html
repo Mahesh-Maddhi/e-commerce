@@ -1,5 +1,6 @@
 {% extends "base.html" %} 
 {% load static %}
+
 {% block linktags %}
 <link rel="stylesheet" type="text/css" href="{%static 'css/contact.css'%}"></link>
 {% endblock linktags %}
@@ -8,12 +9,21 @@
 {% block body%}
     
     <header>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="/home">
-          <img class="logo" src="{% static "media/images/logo.jpg" %}" alt="logo" style="aspect-ratio:1/1" />
+      <nav class=" fixed-top navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand order-sm-1 order-md-1 order-lg-1 order-xl-1" 
+        href="{% if request.path == '/home/'%}#home{% else %}/home{% endif %}">
+          <img class="logo" src="{% static 'media/images/emart_logo.png' %}" alt="logo" />
         </a>
+        <div class="profile-icons order-sm-2 order-md-2 order-lg-3 order-xl-3">
+              
+            <i id="searchIcon" class="search-icon fa-solid fa-magnifying-glass"></i>
+          
+              <a class="fa-solid fa-user icon {% if request.path == '/user/' %}active{% endif %}" href="#"></a>
+              <a class="fa-solid fa-cart-shopping icon {% if request.path == '/cart/' %}active{% endif %}" href="#"></a>
+            </div>
+
         <button
-          class="navbar-toggler"
+          class="navbar-toggler order-sm-3 order-md-3 order-lg-2 order-xl-2"
           type="button"
           data-toggle="collapse"
           data-target="#navbarSupportedContent"
@@ -21,75 +31,70 @@
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon order-sm-3 order-md-3 order-lg-2 order-xl-2"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse order-sm-3 order-md-3 order-lg-2 order-xl-2" id="navbarSupportedContent">
           <ul class="navbar-nav ">
             <li class="nav-item">
-              <a class="nav-link {% if request.path == '/home/' %}active{% endif %}" href="/home">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link {% if request.path == '/home/' %}active{% endif %}"
+               href="{% if request.path == '/home/'%}#home{% else %}/home{% endif %}">HOME <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link {% if request.path == '/about/' %}active{% endif %}" href="/about">About</a>
+              <a class="nav-link {% if request.path == '/about/' %}active{% endif %}" 
+              href="{% if request.path == '/about/'%}#home{% else %}/about{% endif %}">ABOUT</a>
             </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle {% if request.path == '/services/' %}active{% endif %}"
-                href="/services"
-                id="navbarDropdown"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Services
+            <li class="nav-item">
+              <a class="nav-link {% if request.path == '/shop/' %}active{% endif %}" 
+              href="{% if request.path == '/shop/'%}#home{% else %}/shop{% endif %}">
+                SHOP
               </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/services">Fasion</a>
-                <a class="dropdown-item" href="/services">Electronics</a>
-                <a class="dropdown-item" href="/services">Groceries</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/services">Furniture</a>
-              </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link {% if request.path == '/contact/' %}active{% endif %}" href="/contact" tabindex="-1">Contact Us</a>
+              <a class="nav-link {% if request.path == '/contact/' %}active{% endif %}" 
+              href="{% if request.path == '/contact/'%}#home{% else %}/contact{% endif %}" tabindex="-1">CONTACT US</a>
             </li>
           </ul>
-          <form class="form-inline ml-3">
+          
+
+            
+
+            
+        </div>
+        
+      </nav>
+      <form class="form-inline">
             <input
-            class="search"
+            id="searchBar"
+            class="search d-none"
             type="search"
             placeholder="Search"
             
-            />
-            <i class="search-icon fa-solid fa-magnifying-glass" style="color: #63E6BE;"></i>
-          </form>
-
-            <h6 class="username ml-2">welcome, {{username}}</h6>
-
-            <a class="logout-button btn  ml-auto" href="{% url "logout"%}">Logout</a>
-            
-            
-
-            <a class="fa-solid fa-cart-shopping icon" href="#"></a>
-        </div>
-      </nav>
+            /></form>
     </header>
-    <main class="main-container ">
+    <main class="main-container " id="home">
         {% block main %}
-        <h1 class="main-heading">Categories</h1>
+        <div class="landing-bg" >
+
+        </div>
+        <div class="categories">
+          <h1 class="main-heading">Categories</h1>
         <div class="card-container row justify-content-md-center">
           {% for category in categories %}
             <div class="col-12 col-md-6 col-lg-4 col-xl-3">
               
               <div class="category-card" style="background-image: url('{{category.image}}');">
                 
-              <h4 class="category-name">{{category.name}}</h4>
+              <span class="category-name">{{category.name}}</span>
+              <div class="text-center">
+                <button class="primary-button trans">show More</button>
+              </div>
               </div>
             </div>
             {% endfor %}
           </div>
+        </div>
+        
         <div class="card-container row ">
           
           {% for product in products %}
@@ -97,15 +102,15 @@
             <div class="card">
               <div class="product-images">
               <img 
-              srcset="{{product.images.0}},{{product.images.1}},{{product.images.2}}"
-              src="{{product.images.0}}" alt="" class="product-image" loading="lazy">
+              
+              src="{{product.thumbnail}}" alt="" class="product-image" loading="lazy">
               </div>
               <h4 class="product-title">{{product.title}}</h4>
               <div>
               <span class="product-price">$ {{product.price}}</span>
-              <span class="category"> * {{product.category.name}}</span>
+              <span class="category"> * {{product.category}}</span>
               </div>
-              <button class="primary-button">Add to Cart</button>
+              <button class="primary-button trans">Add to Cart</button>
             </div>
           </div>
           {% endfor %}
@@ -113,7 +118,45 @@
         
         {% endblock main %}
       </main>
-    <footer>
-      
-    </footer>
+
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="{% static 'media/images/logo_emart_fresh.png' %}" />
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+            <div class="col-md-3">
+                <h4>Quick Links</h4>
+                <ul class="list-unstyled">
+                    <li><a href="{% if request.path == '/home/'%}#home{% else %}/home{% endif %}">Home</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="{% if request.path == '/contact/'%}#home{% else %}/contact{% endif %}">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h4>Connect With Us</h4>
+                <ul class="list-unstyled">
+                    <li><a href="#" target="_blank">Facebook</a></li>
+                    <li><a href="#" target="_blank">Twitter</a></li>
+                    <li><a href="#" target="_blank">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <p>&copy; 2024 <img src="{% static 'media/images/footer_logo_emart.png' %}" class="footer-logo" /> Company. All rights reserved.</p>
+            </div>
+            <div class="col-md-6 text-right">
+                <p>Designed and Developed by <a href="https://www.yourdesigner.com" target="_blank">Mahesh</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
 {% endblock body %}

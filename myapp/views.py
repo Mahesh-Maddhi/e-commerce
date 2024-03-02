@@ -16,6 +16,22 @@ def get_data(url):
         return {"error occured while api fetch with status code":response.status_code}
     
 
+def get_categories(api_response):
+
+    categories = []
+
+    for product in api_response["products"]:
+        category = product["category"]
+        thumbnail_image = product["thumbnail"]
+
+        category_exists = any(d["name"] == category for d in categories)
+        if not category_exists:
+            categories.append({"name": category, "image": thumbnail_image})
+    
+
+    return categories
+
+
 
 def user_login(request):
     if request.user.is_authenticated:
@@ -67,22 +83,14 @@ def user_logout(request):
 
 def home(request):
     
-    products = get_data('https://api.escuelajs.co/api/v1/products?offset=0&limit=10')
-    categories = get_data('https://api.escuelajs.co/api/v1/categories?limit=8')
-   
-    # to create clear links
-    for product in products:
-        links = []
-        for link in product['images']:
-            link= link.strip('["]')
-            links.append(link)
-        # print(links)
-        product['images'] = links
+    products = get_data('https://dummyjson.com/products')
+    categories = get_categories(products)
+    
    
     context={
         "username":request.user.username,
-        "products":products,
-        "categories":categories
+        "products":products["products"],
+       "categories":categories
     }
     
     if request.user.is_authenticated:
@@ -96,7 +104,7 @@ def about(request):
     return redirect('/login')
     
 
-def services(request):
+def shop(request):
     if request.user.is_authenticated:
         return render(request,'fasion.html',{"username":request.user.username})
     return redirect('/login')

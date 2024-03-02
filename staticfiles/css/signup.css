@@ -17,6 +17,7 @@
      box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
  }
 
+
  .form input {
      font-family: "Roboto", sans-serif;
      outline: 0;
@@ -33,7 +34,7 @@
      font-family: "Roboto", sans-serif;
      text-transform: uppercase;
      outline: 0;
-     background: #4CAF50;
+     background: #FFC61C;
      width: 100%;
      border: 0;
      padding: 15px;
@@ -47,7 +48,7 @@
  .form button:hover,
  .form button:active,
  .form button:focus {
-     background: #43A047;
+     background: #FEB50D;
  }
 
  .form .message {
@@ -57,7 +58,7 @@
  }
 
  .form .message a {
-     color: #4CAF50;
+     color: #FEB50D;
      text-decoration: none;
  }
 
@@ -107,10 +108,9 @@
  }
 
  body {
-     background: #76b852;
      /* fallback for old browsers */
-     background: rgb(141, 194, 111);
-     background: linear-gradient(90deg, rgba(141, 194, 111, 1) 0%, rgba(118, 184, 82, 1) 50%);
+     background: #33343D;
+     background-image: radial-gradient(farthest-corner, #717171,  #33343D  );
      font-family: "Roboto", sans-serif;
      -webkit-font-smoothing: antialiased;
      -moz-osx-font-smoothing: grayscale;
@@ -120,6 +120,11 @@
      align-items: center;
      min-height: 100vh; */
 
+ }
+ .heading .logo{
+    width: 100%;
+    height: 40px;
+    margin-bottom: 20px;
  }
 
  .password-container{

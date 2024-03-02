@@ -1,4 +1,8 @@
-document.getElementById("spinner");
+let spinner = document.getElementById("spinner");
+let categoryCardEl = document.getElementById("categoryCard");
+let searchIconEl = document.getElementById("searchIcon");
+let searchBarEl = document.getElementById("searchBar");
+
 
 async function requestServer(url, payload = { method: "GET" }) {
 	try {
@@ -11,7 +15,9 @@ async function requestServer(url, payload = { method: "GET" }) {
 	}
 }
 
-document.addEventListener("DOMContentLoaded",()=>{
-	spinner.classList.add("d-none")
-})
+document.addEventListener("DOMContentLoaded", () => {spinner.classList.add("d-none");});
 
+searchIconEl.addEventListener("click", () => {
+	searchBarEl.classList.toggle("d-block");
+	console.log("hello");
+});

@@ -4,9 +4,9 @@
 {% block title %}User Login{% endblock title %} 
 {% block linktags %}<link href="{%static 'css/signup.css'%}" rel="stylesheet">{% endblock linktags %}
 {% block body%}
-<div class="login-page">
-  <div class="form">
-    <h1 class="heading">Ecommerce</h1>
+<div class="login-page row">
+  <div class="form col-12">
+    <h1 class="heading"><img class ="logo" src="{% static "media/images/Emart-logo.png" %}"/></h1>
     <form class="login-form" method = "post">
       {% csrf_token %}
       <input type="text" placeholder="Username" name = "username" required />
