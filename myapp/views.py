@@ -86,7 +86,7 @@ def home(request):
     products = get_data('https://dummyjson.com/products')
     categories = get_categories(products)
     
-   
+    
     context={
         "username":request.user.username,
         "products":products["products"],
@@ -105,8 +105,12 @@ def about(request):
     
 
 def shop(request):
+    products = get_data('https://dummyjson.com/products')
+    context = {
+        "products":products['products']
+    }
     if request.user.is_authenticated:
-        return render(request,'fasion.html',{"username":request.user.username})
+        return render(request,'shop.html',context)
     return redirect('/login')
     
 

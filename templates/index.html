@@ -83,7 +83,7 @@
           {% for category in categories %}
             <div class="col-12 col-md-6 col-lg-4 col-xl-3">
               
-              <div class="category-card" style="background-image: url('{{category.image}}');">
+              <div class="category-card" style="background-image: url('{{category.image}}');" loading="lazy">
                 
               <span class="category-name">{{category.name}}</span>
               <div class="text-center">
@@ -95,26 +95,7 @@
           </div>
         </div>
         
-        <div class="card-container row ">
-          
-          {% for product in products %}
-          <div class="co1-12 col-md-6 col-lg-4 col-xl-3">
-            <div class="card">
-              <div class="product-images">
-              <img 
-              
-              src="{{product.thumbnail}}" alt="" class="product-image" loading="lazy">
-              </div>
-              <h4 class="product-title">{{product.title}}</h4>
-              <div>
-              <span class="product-price">$ {{product.price}}</span>
-              <span class="category"> * {{product.category}}</span>
-              </div>
-              <button class="primary-button trans">Add to Cart</button>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
+       
         
         {% endblock main %}
       </main>
@@ -124,7 +105,7 @@
         <div class="row">
             <div class="col-md-6">
                 <img src="{% static 'media/images/logo_emart_fresh.png' %}" />
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <p>Explore our store for top-notch products! Unbeatable quality, irresistible prices. Elevate your lifestyle today. Shop now and enjoy exclusive deals! </p>
             </div>
             <div class="col-md-3">
                 <h4>Quick Links</h4>
@@ -136,13 +117,34 @@
             </div>
             <div class="col-md-3">
                 <h4>Connect With Us</h4>
-                <ul class="list-unstyled">
-                    <li><a href="#" target="_blank">Facebook</a></li>
-                    <li><a href="#" target="_blank">Twitter</a></li>
-                    <li><a href="#" target="_blank">Instagram</a></li>
+                <ul class="list-unstyled services">
+                    <li><a href="#" target="_blank" class="social"><i class="fa-brands fa-facebook icon"></i></a></li>
+                    <li><a href="#" target="_blank" class="social"><i class="fa-brands fa-x-twitter icon"></i></a></li>
+                    <li><a href="#" target="_blank" class="social"><i class="fa-brands fa-instagram icon"></i></a></li>
+                    <li><a href="#" target="_blank" class="social"><i class="fa-brands fa-youtube icon"></i></a></li>
                 </ul>
             </div>
         </div>
+        <div class="row">
+                    <div class="col-md-12">
+                        <hr>
+                    </div>
+                </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h4>Our other services</h4>
+                <ul class="list-unstyled services">
+                  <li><a href="#" class="service-logo"><img src="{% static 'media/images/emart_everydaylogo.jpg' %}" alt="service"/></a></li>
+                  <li><a href="#" class="service-logo"><img src="{% static 'media/images/emart_wholesale_fasion.png' %}" alt="service"/></a></li>
+                  <li><a href="#" class="service-logo"><img src="{% static 'media/images/emart_text.png' %}" alt="service"/></a></li>
+                  <li><a href="#" class="service-logo"><img src="{% static 'media/images/emart_strategies_logo.png' %}" alt="service"/></a></li>
+                  <li><a href="#" class="service-logo"><img src="{% static 'media/images/emart_logo_text.png' %}" alt="service"/></a></li>
+                </ul>
+            </div>
+        </div>
+
+        
+
         <div class="row">
             <div class="col-md-12">
                 <hr>
@@ -153,7 +155,7 @@
                 <p>&copy; 2024 <img src="{% static 'media/images/footer_logo_emart.png' %}" class="footer-logo" /> Company. All rights reserved.</p>
             </div>
             <div class="col-md-6 text-right">
-                <p>Designed and Developed by <a href="https://www.yourdesigner.com" target="_blank">Mahesh</a></p>
+                <p>Designed and Developed by &#10084; <a href="https://mahesh-maddhi.github.io/my-portfolio/" target="_blank"> Mahesh Maddhi</a></p>
             </div>
         </div>
     </div>
