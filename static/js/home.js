@@ -4,6 +4,7 @@ let searchIconEl = document.getElementById("searchIcon");
 let searchBarEl = document.getElementById("searchBar");
 
 
+
 async function requestServer(url, payload = { method: "GET" }) {
 	try {
 		let response = await fetch(url, payload);
@@ -19,5 +20,11 @@ document.addEventListener("DOMContentLoaded", () => {spinner.classList.add("d-no
 
 searchIconEl.addEventListener("click", () => {
 	searchBarEl.classList.toggle("d-block");
-	console.log("hello");
+	
 });
+
+function closeModel(){
+	document.getElementById("staticBackdrop").classList.remove("d-block","show")
+	
+
+}

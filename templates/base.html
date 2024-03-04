@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>E-Commerce | {% block title %}{% endblock title %} </title>
+    <title>E-mart | {% block title %}{% endblock title %} </title>
    
    <link rel="stylesheet" type="text/css" href="{%static 'css/bootstrap.min.css'%}"></link>
    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}"></link>
@@ -22,31 +22,49 @@
 
   <body>
     <div class="message-container">
-          {% if messages %}
-            <ul class="messages mb-0">
-                {% for message in messages %}
-                      <li {% if message.tags %} class=" alert alert-{{message.tags }} alert-dismissible fade show mb-0" role="alert"{% endif %}>
-                        
-                          <strong>{{ message.tags }}! </strong> {{message}}
-                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                          </button>
-                      </li>
-                  {% endfor %}      
-            </ul>
-          {% endif %}
-    
-    </div>
+      {% if messages %}
+      
+      {% for message in messages %}
+      <div class="modal d-block show fade border-{{message.tags}}" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-{{message.tags}}" id="staticBackdropLabel">{{message.tags}}!</h5>
+              <button type="button" class="modal-close-button" onClick="closeModel()">
+                <span>&times;</span>
+              </button>
+            </div>
+            <div class="modal-body text-center">
+              {{message}}
+            </div>
+            <div class="modal-footer">
+              <button onClick="closeModel()"type="button" class=" modal-close-button btn btn-{{message.tags}} text-white">Ok</button>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% endfor %}
+
+
+      {% endif %}
+
+
+    </div> 
+
     {% block body %}
     
     {% endblock body %}
     <div class="spinner" id="spinner"></div>
+     
 
     <script src="{%static 'js/jquery-3.5.1.slim.min.js.map'%}"></script>
       <script src="{%static 'js/popper.min.js.map'%}"></script>
       <script src="{%static 'js/bootstrap.min.js.map'%}"></script>
       <script src="{%static 'js/signup.js'%}"></script>
       <script src="{%static 'js/home.js'%}"></script>
+      {% block script_tags %}{% endblock script_tags %}
   </body>
 
 </html>

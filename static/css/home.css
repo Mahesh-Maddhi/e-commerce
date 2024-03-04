@@ -1,37 +1,55 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Acme&family=Inter:wght@500&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+
+
+
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	font-family: "poppins",system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	font-family: "poppins",'system-ui', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Open Sans', 'Helvetica Neue', sans-serif;
 	scroll-behavior: smooth;
 	
 }
-body:not(:focus){
-	caret-color: none;
-}
+
+/* .message-container{
+	z-index: 2;
+} */
 .messages {
 	list-style-type: none;
 	padding-left: 0px;
 }
+.modal-header .modal-close-button{
+	aspect-ratio: 1/1;
+	border: none;
+	outline: none;
+	padding: 10px;
+	border-radius: 40px;
+}
+
+.modal-header .modal-close-button:active{
+	border: none;
+	outline: none;
+}
+
+.modal-body{
+	border: none;
+}
 
 /* ------------------- Header ------------------------- */
 
-/* .navbar{
-	position: fixed !important;
-	width: 100%;
-	z-index: 100;
-	padding: 10px;
-	box-shadow: 0px 0px 20px black;
-} */
 
+.header{
+	transition: all 0.3s ease-in-out;
+}
 .logo {
 	margin-left: 20px ;
 	text-shadow: 0px 0px 5px #FFC61C;
 	margin: 0px 10px;
 }
-.nav-bar{
-	box-shadow: 0px 0px 10pxrgb(0, 0, 0)C;
+.navbar{
+	box-shadow: 0px 0px 10px rgb(0, 0, 0);
 }
 .navbar-nav .nav-item:hover{
 	text-shadow: 0px 0px 5px #FFC61C;
@@ -73,14 +91,8 @@ body:not(:focus){
 	max-width: 150px;
 	margin-left: auto;
 }
-.landing-bg{
-	width: 100%;
-	height: 100vh;
-	background-image: url("/static/media/images/bg-emart.webp");
-	background-size: cover;
-	background-position: center;
 
-}
+
 /* .username {
 	color: white;
 } */
@@ -120,13 +132,65 @@ body:not(:focus){
 /* ---------------- Main ------------------- */
 
 .trans{
-	transition:all 0.5s ease-in ;
+	transition:all 0.3s ease-in ;
 }
 
 .main-container {
-	min-height: 100vh;
+	min-height: calc(100vh);
     width: 100%;
 	font-family: "poppins";
+	
+}
+.landing-bg{
+	color: white;
+	width: 100%;
+	min-height: calc(100dvh);
+	background-image: url("/static/media/images/bg-cart-center.jpg");
+	background-size: cover;
+	background-position: center;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
+}
+
+.landing-bg .main-heading{
+	margin-top: 70px;
+	font-family: "Poppins" !important;
+	font-size: 20px;
+	text-shadow: -5px 5px 5px black;
+	text-align: center;
+
+}
+
+.landing-bg .primary-button{
+	margin: 0px auto;
+	width: fit-content;
+	background-color: transparent;
+
+}
+
+.landing-bg .passage{
+	font-size: 14px;
+	text-align: center;
+	padding: 10px;
+	border: 2px solid #848484;
+	border-radius: 2rem;
+	margin-top: 10px;
+
+}
+.landing-bg .passage .para{
+	margin-top: 10px;
+	text-shadow: 0px 0px 5px rgb(0, 0, 0);
+
+}
+
+/* ----------------categories-section---------------- */
+
+.categories h1{
+	text-align: center;
+	margin-top: 70px;
 }
 
 .category-card{
@@ -139,12 +203,12 @@ body:not(:focus){
 
 	background-size: cover;
 	background-position: center;
-	border: 1px solid rgb(138, 138, 138);
-	min-height: 300px;
+	height: 200px;
 	margin: 20px;
 	overflow: hidden;
 	aspect-ratio: 3/4;
 	cursor: pointer;
+	border: 1px solid #FEB50D;
 	box-shadow: 0px 0px 20px rgb(172, 172, 172);
 
 }
@@ -153,7 +217,7 @@ body:not(:focus){
 
 	width:fit-content;
 	height: fit-content;
-	background-color: rgb(162, 153, 153);
+	background-color: rgba(162, 153, 153,0.5);
 	font-size: 14px;
 	font-weight: bold;
 	padding: 2px 10px;
@@ -188,15 +252,18 @@ body:not(:focus){
 	align-items: center;
 	padding: 4px 4px 10px;
 	margin: 20px 10px;
-	box-shadow: 0px 0px 10px rgb(195, 195, 195);
+	border: 1px solid #FEB50D;
+	box-shadow: 0px 0px 20px rgb(172, 172, 172);
      border-radius: 1rem;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
+	aspect-ratio: 3/5;
 	
 }
 
 .card-container .card:hover {
     transform: scale(1.02);
+	box-shadow: 0px 0px 20px#FEB50D;
 	
 }
 /* .product-images:hover .product-image {
@@ -215,11 +282,11 @@ body:not(:focus){
 }
 .product-images{
     overflow: hidden;
-    transition: all 0.5s ease;
+    transition: all 0.4s ease;
 }
 
 .card .product-title {
-    font-size: 20px;
+    font-size: 14px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow:ellipsis;
@@ -228,17 +295,23 @@ body:not(:focus){
 	
 }
 .card .product-price{
-    color: rgb(67, 67, 230);
+    color: rgb(219, 22, 22);
     font-weight: bold;
+}
+.card .discount-percentage{
+	color: rgb(26, 209, 26);
+	font-weight: bold;
+	font-size: 16px;
 }
 
 
 .primary-button{
-	margin: 5px;
-	padding: 4px 30px 4px 30px;
-	color: rgb(70, 70, 70);
+	text-decoration: none;
+	
+	padding: 4px 20px 4px 20px;
+	color: #FFC61C;
 	outline:none;
-	border: 2px solid  rgb(70, 70, 70);
+	border: 1px solid  #FEB50D;
 	border-radius: 10px;
 	background-color: white;
 	
@@ -247,8 +320,10 @@ body:not(:focus){
 
 .primary-button:hover {
 	outline:none;
-	background-image:linear-gradient(10deg,rgb(70, 70, 70),rgb(30, 30, 30)) ;
+	background-image:linear-gradient(10deg,#FFC61C, #FEB50D) ;
 	color: white;
+	border: 2px solid white;
+	text-decoration: none;
 }
 
 
@@ -271,6 +346,46 @@ body:not(:focus){
 }
 
 
+@media screen and (min-width:768px) {
+
+	.landing-bg .main-heading{
+		font-size: 25px;
+		width: 50dvw;
+		margin-top: 70px;
+		margin-left: auto;
+	}
+
+	.landing-bg .passage{
+		font-size: 16px;
+		width: 50vw;
+		margin-left: auto;
+	}
+	.landing-bg .primary-button{
+		margin: 0px 20% 0px auto  ;
+	}
+	.landing-bg{
+		background-image: url("/static/media/images/bg-cart-left.jpg");
+	}
+
+}
+
+
+
+/* -------------------SHOP----------------- */
+
+
+.products{
+	padding: 70px 40px;
+}
+
+
+
+
+
+
+
+
+
 /* --------------footer------------- */
 .footer{
 	padding: 40px 6px;
@@ -288,9 +403,10 @@ div hr{
 }
 
 .service-logo img{
-	height: 50px;
+	height: 60px;
 	margin: 10px;
-	aspect-ratio: 3/1;
+	width: auto;
+	aspect-ratio: 5/3;
 	
 }
 div .services{

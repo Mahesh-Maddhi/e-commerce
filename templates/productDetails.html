@@ -1,0 +1,64 @@
+{% extends "index.html" %} 
+
+{% load static %} 
+{% block linktags %} 
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static 'css/product_details.css' %}">
+
+{% endblock linktags %} 
+
+{% block title %}Product Details{% endblock title %} 
+{% block script_tags %}
+{{ block.super }}
+<script type="text/javascript" src="{% static 'js/product_details.js' %}"></script>
+{% endblock script_tags %}
+
+{% block main%}
+
+<div class="product-section">
+    
+    
+
+    <div id="product-container">
+        <div class="d-flex">
+            <div class="image-container">
+                <img id="product-image" src="{{product.thumbnail}}" alt="product.title">
+                <div id="image-gallery">
+                    <!-- Added more image elements here for the gallery -->
+                    {% for image_url in product.images %}
+                    <img src="{{image_url}}" alt="">
+                    
+                    {% endfor %}
+                </div>
+            </div>
+            
+
+            <div id="product-info">
+                <h2>{{product.title}}</h2>
+                <p><strong>Category:</strong> {{ product.category}}</p>
+                <p><strong>Brand:</strong> {{ product.brand}}</p>
+                <p><strong>Price:</strong> ${{ product.price}}</p>
+                <p><strong>Discount :</strong> {{ product.discountPercentage}} %</p>
+                <p><strong>In Stock:</strong> {{product.stock}}</p>
+                <p><strong>Rating:</strong> {{product.rating}}⭐⭐⭐⭐⭐ (5295 reviews)</p>
+            </div>
+        </div>
+
+
+
+
+        <div id="description">
+            <h3>Description</h3>
+            <p>{{product.description}}</p>
+            
+        </div> 
+
+
+        <div id="add-to-cart">
+            <button>Add to Cart</button>
+        </div>
+
+    </div>
+</div>
+
+{% endblock main %}

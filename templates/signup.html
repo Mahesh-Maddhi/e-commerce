@@ -11,9 +11,9 @@
       {% csrf_token %}
       <input type="text" placeholder="Username" name = "username" required/>
       <input type="email" placeholder="user@gmail.com" name = "email" required/>
-      <input type="password" placeholder="Enter Password" required/>
+      <input type="text" placeholder="Enter Password" name="confirm-password" minlength = "8" required/>
       <div class="password-container">
-        <input id= "password" type="password" placeholder="Confirm Password" name = "password" required/>
+        <input id= "password" type="password" placeholder="Confirm Password" name = "password" minlength = "8" required/>
         <i class="fa-solid fa-eye icon " id="eyeOpenIcon"></i><i class="fa-solid fa-eye-slash icon d-none" id="eyeCloseIcon"></i>
 
       </div>

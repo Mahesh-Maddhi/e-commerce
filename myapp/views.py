@@ -1,10 +1,11 @@
-from django.shortcuts import render, HttpResponse, redirect,get_object_or_404
+from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.contrib.auth import logout, authenticate, login
 from django.contrib import messages
 from django.contrib.auth.models import User
 from myapp.models import SignedUser, Contact
 import requests
-import json
+
+
 # Create your views here.
 
 def get_data(url):
@@ -35,15 +36,15 @@ def get_categories(api_response):
 
 def user_login(request):
     if request.user.is_authenticated:
-        return render(request,'index.html',{"username":request.user.username})
+        return redirect('/home')
     try:
         if request.method == "POST":
             username = request.POST.get("username")
             password = request.POST.get("password")
+            # User validation
             user = authenticate(username = username, password = password)
             
             if user is not None:
-                
                 messages.success(request, "You Logged in Successfully.")
                 login(request,user)
                 return redirect("/home")
@@ -59,18 +60,21 @@ def user_signup(request):
         username = request.POST.get("username")
         email = request.POST.get("email")
         password = request.POST.get("password")
-      
-        if User.objects.filter(username=username).exists():
-            messages.error(request,"username already in use try another one!")
+        confirm_password = request.POST.get("confirm-password")
+        if password != confirm_password:
+            messages.error(request,"Please enter same password as above!")
         else:
-            try:
-                user = User.objects.create_user(username = username,email = email, password = password)
-            except Exception as e:
-                messages.error(request,f"Something went wrong: {e}")
+            if User.objects.filter(username=username).exists():
+                messages.error(request,"Username already in use try another one!")
+            else:
+                try:
+                    user = User.objects.create_user(username = username,email = email, password = password)
+                except Exception as e:
+                    messages.error(request,f"Something went wrong: {e}")
 
-            user.save()
-            messages.success(request,"Registered Successfully!")
-            return redirect("/login")
+                user.save()
+                messages.success(request,"Registered Successfully!")
+                return redirect("/login")
     return render(request,'signup.html')
     
         
@@ -82,6 +86,10 @@ def user_logout(request):
     return redirect('/login')
 
 def home(request):
+    if request.method == "POST":
+        print("hello")
+        category = request.POST.get('category')
+        print(category)
     
     products = get_data('https://dummyjson.com/products')
     categories = get_categories(products)
@@ -95,6 +103,7 @@ def home(request):
     
     if request.user.is_authenticated:
         return render(request,'index.html',context)
+    
     return redirect('/login')
     
 
@@ -105,7 +114,18 @@ def about(request):
     
 
 def shop(request):
+    # product form
+    if request.method == "POST":
+        product_id = request.POST.get('product_id')
+        
+        product_details_data = {"product_id":product_id}
+        
+        #sending session data to product-details
+        request.session['product_details_data'] = product_details_data
+        return redirect('/product-details')
+    
     products = get_data('https://dummyjson.com/products')
+
     context = {
         "products":products['products']
     }
@@ -138,3 +158,18 @@ def contact(request):
 
     return redirect('/login')
     
+def product_details(request):
+
+    product_details = request.session.get('product_details_data',{})
+    print(product_details)
+    product_id = product_details['product_id']
+    url = 'https://dummyjson.com/products/'+ str(product_id)
+    product = get_data(url)
+    print(product)
+
+
+    context = {"product" : product}
+
+    if request.user.is_authenticated:
+        return render(request,'productDetails.html',context)
+    return redirect('/login')
