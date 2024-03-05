@@ -2,6 +2,8 @@ let spinner = document.getElementById("spinner");
 let categoryCardEl = document.getElementById("categoryCard");
 let searchIconEl = document.getElementById("searchIcon");
 let searchBarEl = document.getElementById("searchBar");
+let searchInputEl = document.getElementById("search-input");
+let searchBtnEl = document.getElementById("searchBtn");
 
 
 
@@ -19,7 +21,19 @@ async function requestServer(url, payload = { method: "GET" }) {
 document.addEventListener("DOMContentLoaded", () => {spinner.classList.add("d-none");});
 
 searchIconEl.addEventListener("click", () => {
-	searchBarEl.classList.toggle("d-block");
+	searchBarEl.classList.toggle("d-none");
+	searchInputEl.focus();
+
+	
+});
+searchBarEl.addEventListener("keydown", (event) => {
+
+	if (event.key === "Enter"){
+		searchBarEl.classList.toggle("d-none");
+		searchBtnEl.click()
+		console.log("form-submitted")
+	}
+	
 	
 });
 

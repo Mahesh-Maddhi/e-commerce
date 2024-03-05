@@ -1,6 +1,6 @@
 {% extends "index.html" %} 
-{% load static %} 
-{% block linktags %} {% endblock linktags %} 
+{% load static %} {% block linktags %} 
+{% endblock linktags %}
 {% block title %}Shop{% endblock title %} 
 {% block main %}
 
@@ -21,17 +21,13 @@
 				<div>
 					<span class="product-price">$ {{product.price}}</span>
 
-
-					<span class="discount-percentage"
-						> {{product.discountPercentage}} % off</span
+					<span class="discount-percentage">
+						{{product.discountPercentage}} % off</span
 					>
 				</div>
 				<!-- Hidden input fields for form submission -->
-				<input
-					type="hidden"
-					name="product_id"
-					value="{{product.id}}" />
-				<button type="submit" class="primary-button trans">Add to Cart</button>
+				<input type="hidden" name="product_id" value="{{product.id}}" />
+				<button type="submit" class="primary-button trans" name="form" value="product">Get Details</button>
 			</form>
 		</div>
 		{% endfor %}

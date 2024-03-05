@@ -63,14 +63,18 @@
         </div>
         
       </nav>
-      <form class="form-inline">
+      <form method = "post" id="searchBar" class="form-inline trans search-bar d-none">
+        {% csrf_token %}
             <input
-            id="searchBar"
-            class="search d-none"
+            id="search-input"
+            class="search"
             type="search"
             placeholder="Search"
+            name="query"
             
-            /></form>
+            />
+            <button id="searchBtn" name="form" value="search" class="d-none" type="submit"></button>
+      </form>
     </header>
     <main class="main-container" id="home">
         {% block main %}
@@ -95,9 +99,9 @@
                 {% csrf_token %}
                 <span class="category-name">{{category.name}}</span>
                 <div class="text-center">
-                  <!-- hiddden input -->
+                  <!-- hidden input -->
                   <input type="hidden" value="{{category.name}}" name="category" />
-                  <button type ="submit" class="primary-button ">show More</button>
+                  <button type ="submit" class="primary-button " name = "form" value="category">show More</button>
                 </div>
               </form>
             </div>

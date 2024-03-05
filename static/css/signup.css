@@ -137,7 +137,10 @@
     position: absolute;
     right:60px;
     cursor: pointer;
+    color: #FEB50D;
+	font-size: 20px;
  }
+
  /* cyrillic */
  @font-face {
      font-family: 'Jost';

@@ -16,9 +16,6 @@
 {% block main%}
 
 <div class="product-section">
-    
-    
-
     <div id="product-container">
         <div class="d-flex">
             <div class="image-container">
@@ -37,10 +34,10 @@
                 <h2>{{product.title}}</h2>
                 <p><strong>Category:</strong> {{ product.category}}</p>
                 <p><strong>Brand:</strong> {{ product.brand}}</p>
-                <p><strong>Price:</strong> ${{ product.price}}</p>
-                <p><strong>Discount :</strong> {{ product.discountPercentage}} %</p>
+                <p><strong>Price:</strong><span class="product-price"> ${{ product.price}}</span></p>
+                <p><strong>Discount :</strong><span class="product-discount"> {{ product.discountPercentage}}  %</span></p>
                 <p><strong>In Stock:</strong> {{product.stock}}</p>
-                <p><strong>Rating:</strong> {{product.rating}}⭐⭐⭐⭐⭐ (5295 reviews)</p>
+                <p><strong>Rating:</strong> {{product.rating}} <span class="star"></span> <span class="star"></span> <span class="star"></span> <span class="star"></span>  (5295 reviews)</p>
             </div>
         </div>
 
@@ -55,6 +52,7 @@
 
 
         <div id="add-to-cart">
+            <button>Buy Now</button>
             <button>Add to Cart</button>
         </div>
 
