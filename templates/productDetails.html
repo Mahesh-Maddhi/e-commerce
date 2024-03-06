@@ -17,7 +17,7 @@
 
 <div class="product-section">
     <div id="product-container">
-        <div class="d-flex">
+        <div class="product-details-container">
             <div class="image-container">
                 <img id="product-image" src="{{product.thumbnail}}" alt="product.title">
                 <div id="image-gallery">
@@ -28,7 +28,6 @@
                     {% endfor %}
                 </div>
             </div>
-            
 
             <div id="product-info">
                 <h2>{{product.title}}</h2>
@@ -40,9 +39,6 @@
                 <p><strong>Rating:</strong> {{product.rating}} <span class="star"></span> <span class="star"></span> <span class="star"></span> <span class="star"></span>  (5295 reviews)</p>
             </div>
         </div>
-
-
-
 
         <div id="description">
             <h3>Description</h3>

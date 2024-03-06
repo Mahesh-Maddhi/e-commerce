@@ -1,5 +1,6 @@
-from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
+from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth import logout, authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
 from myapp.models import SignedUser, Contact
@@ -29,6 +30,7 @@ def get_categories(api_response):
     
 
     return categories
+
 
 def search(request):
     if request.method == "POST":
@@ -111,6 +113,7 @@ def user_logout(request):
     messages.success(request,"Logged out Successfully!")
     return redirect('/login')
 
+
 def home(request):
     if request.method == "POST":
         if request.POST.get("form") == "search":
@@ -136,10 +139,8 @@ def home(request):
        "categories":categories
     }
     
-    if request.user.is_authenticated:
-        return render(request,'index.html',context)
+    return render(request,'index.html',context)
     
-    return redirect('/login')
     
 
 def about(request):
@@ -148,8 +149,8 @@ def about(request):
             # sending session data to search
             request.session['query'] = query
             return redirect("/search")
-    if request.user.is_authenticated:
-        return render(request,'about.html')
+    
+    return render(request,'about.html')
     return redirect('/login')
     
 
@@ -178,9 +179,8 @@ def shop(request):
         "products":products['products']
     }
 
-    if request.user.is_authenticated:
-        return render(request,'display_products.html',context)
-    return redirect('/login')
+    
+    return render(request,'display_products.html',context)
     
 
 def contact(request):
@@ -212,10 +212,8 @@ def contact(request):
             else:
                 messages.error(request, " User details already exist!")
 
-    if request.user.is_authenticated:
-        return render(request,'contact.html',{"username":request.user.username})
+    return render(request,'contact.html',{"username":request.user.username})
 
-    return redirect('/login')
     
 def product_details(request):
     if request.method == "POST":
@@ -236,6 +234,10 @@ def product_details(request):
     
     context = {"product" : product}
 
-    if request.user.is_authenticated:
-        return render(request,'productDetails.html',context)
-    return redirect('/login')
+    return render(request,'productDetails.html',context)
+
+@login_required
+def cart(request):
+    products = get_data('https://dummyjson.com/products?limit=3')
+    context = {"products":products["products"]}
+    return render(request, 'cart.html',context)

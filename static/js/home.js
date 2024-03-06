@@ -24,7 +24,6 @@ searchIconEl.addEventListener("click", () => {
 	searchBarEl.classList.toggle("d-none");
 	searchInputEl.focus();
 
-	
 });
 searchBarEl.addEventListener("keydown", (event) => {
 
@@ -33,7 +32,6 @@ searchBarEl.addEventListener("keydown", (event) => {
 		searchBtnEl.click()
 		console.log("form-submitted")
 	}
-	
 	
 });
 

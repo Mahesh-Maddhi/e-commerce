@@ -137,7 +137,4 @@
 	.product-details-container{
 		flex-direction: column;
 	}
-	#product-image {
-		width: 100%;
-	}
 }

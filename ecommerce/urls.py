@@ -21,9 +21,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 # to change the admin site headers
-admin.site.site_header = "Ecommerce Admin"
-admin.site.site_title = "Ecommerce Admin Portal"
-admin.site.index_title = "Welcome to Ecommerce Portal"
+admin.site.site_header = "EMART Admin"
+admin.site.site_title = "EMART Admin Portal"
+admin.site.index_title = "Welcome to EMART Portal"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,4 +33,4 @@ urlpatterns = [
 # Serve static files during development
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
