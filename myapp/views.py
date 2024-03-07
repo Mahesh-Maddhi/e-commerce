@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 from myapp.models import SignedUser, Contact
 import requests
 
-
 # Create your views here.
 
 def get_data(url):
@@ -95,15 +94,15 @@ def user_signup(request):
             messages.error(request,"Please enter same password as above!")
         else:
             if User.objects.filter(username=username).exists():
-                messages.error(request,"Username already in use try another one!")
+                messages.error(request,"Username already taken use another one!")
             else:
                 try:
                     user = User.objects.create_user(username = username,email = email, password = password)
+                    user.save()
+                    messages.success(request,"Registered Successfully!")
                 except Exception as e:
                     messages.error(request,f"Something went wrong: {e}")
 
-                user.save()
-                messages.success(request,"Registered Successfully!")
                 return redirect("/login")
     return render(request,'signup.html')
     
@@ -111,7 +110,7 @@ def user_signup(request):
 def user_logout(request):
     logout(request)
     messages.success(request,"Logged out Successfully!")
-    return redirect('/login')
+    return redirect('/home')
 
 
 def home(request):
@@ -195,22 +194,21 @@ def contact(request):
             return redirect("/search")
             # contact form
         elif request.POST.get("form") == "contact":
-            first_name = request.POST.get("firstname")
-            last_name = request.POST.get("lastname")
-            phone = request.POST.get("phone")
+            full_name = request.POST.get("full_name")
             email = request.POST.get("email")
-            user = authenticate(email=email)
+            user_message = request.POST.get("user_message")
+            user_exist = Contact.objects.filter(email=email).exists()
 
-            if user is not None:
+            if not user_exist:
                 try:
-                    contact = Contact(firstname=first_name,lastname = last_name,phone = phone, email = email)
+                    contact = Contact(full_name = full_name, email = email, user_message = user_message)
                     contact.save()
                     messages.success(request,"Your details Submitted Succesfully.")
                 except Exception as error:
                     messages.warning(request, error)
 
             else:
-                messages.error(request, " User details already exist!")
+                messages.warning(request, "User details already exist!")
 
     return render(request,'contact.html',{"username":request.user.username})
 

@@ -4,6 +4,7 @@ let searchIconEl = document.getElementById("searchIcon");
 let searchBarEl = document.getElementById("searchBar");
 let searchInputEl = document.getElementById("search-input");
 let searchBtnEl = document.getElementById("searchBtn");
+let closeBtnEl = document.getElementById("closeBtn");
 
 
 
@@ -25,6 +26,10 @@ searchIconEl.addEventListener("click", () => {
 	searchInputEl.focus();
 
 });
+closeBtnEl.onclick = ()=>{
+	searchBarEl.classList.toggle("d-none");
+	console.log("close clicked")
+}
 searchBarEl.addEventListener("keydown", (event) => {
 
 	if (event.key === "Enter"){

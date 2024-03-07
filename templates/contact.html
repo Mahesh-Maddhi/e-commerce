@@ -1,58 +1,63 @@
 {% extends "index.html" %} 
-{% load static %}
+{% load static %} 
 {% block title %}Contact Us{% endblock title %} 
-{% block link_tags %}
-{{ block.super }}
-<link rel="stylesheet" type="text/css" href="{% static 'css/contact.css' %}">
-{% endblock link_tags %}
-{% block main%}
+{% block link_tags %} {{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static 'css/contact.css' %}" />
+{% endblock link_tags %} {% block main%}
 
 <section class="contact-section">
-    <h1 class="text-center"> Contact Us</h1>
-    <form method="post" class="contact-form">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="firstname">First Name</label>
-            <input
-                type="text"
-                class="form-control"
-                id="firstname"
-                name="firstname" required/>
-        </div>
-        <div class="form-group">
-            <label for="lastname">Last Name</label>
-            <input
-                type="text"
-                class="form-control"
-                id="lastname" 
-                name="lastname" required/>
-        </div>
-        <div class="form-group">
-            <label for="phone">Phone number</label>
-            <input
-                type="text"
-                class="form-control"
-                id="phone" 
-                name="phone" required  minlength = "10" maxlength = "10" pattern="[0-9]{10}"/>
-        </div>
-        <div class="form-group">
-            <label for="email">Email address</label>
-            <input
-                type="email"
-                class="form-control"
-                id="email"
-                aria-describedby="emailHelp" 
-                name = "email" required/>
-            <small id="emailHelp" class="form-text text-muted"
-                >We'll never share your details with anyone.</small
-            >
-        </div>
-        <div class="text-center">
-            <button type="submit" class="btn btn-primary" name="form" value="contact">Submit</button>
-        </div>
-        
-    </form>
-</section>
+	<h1 class="main-heading">Contact Us</h1>
+	<div class="row w-100 d-flex justify-content-end">
+		<div class="col-12 col-sm-8 col-md-6">
+			<form method="post" class="contact-form">
+				{% csrf_token %}
+				<div class="form-group">
+					<label for="fullname">First Name</label>
+					<input
+						type="text"
+						class="form-control"
+						id="fullname"
+						name="full_name"
+						required />
+				</div>
+				
+				<div class="form-group">
+					<label for="email">Email address</label>
+					<input
+						type="email"
+						class="form-control"
+						id="email"
+						aria-describedby="emailHelp"
+						name="email"
+						required />
+					
+				</div>
+                <div class="form-group">
+					<label for="user_message">Message</label>
+					<textarea rows="3"
+						type="text"
+						class="form-control"
+						id="message"
+						name="user_message"
+						required
+						minlength="10" ></textarea>
 
+                    <small id="emailHelp" class="form-text text-muted"
+						>We'll never share your details with anyone.</small
+					>    
+				</div>
+				<div class="text-center">
+					<button
+						type="submit"
+						class="btn btn-outline-info"
+						name="form"
+						value="contact">
+						Submit
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</section>
 
 {% endblock main %}

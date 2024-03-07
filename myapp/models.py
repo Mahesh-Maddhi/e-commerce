@@ -14,11 +14,10 @@ class SignedUser(models.Model):
     
 
 class Contact(models.Model):
-    firstname = models.CharField(max_length=100)
-    lastname = models.CharField(max_length=100)
-    phone = models.CharField(max_length=15)
+    full_name = models.CharField(max_length=100)
     email = models.EmailField(max_length=200)
+    user_message = models.TextField()
     date = models.DateField(default = datetime.now)
 
     def __str__(self):
-        return self.firstname + " "+ self.lastname
+        return self.full_name

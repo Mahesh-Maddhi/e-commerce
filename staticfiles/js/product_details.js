@@ -3,6 +3,9 @@ let ImageGalleryEl = document.getElementById("image-gallery");
 
 ImageGalleryEl.addEventListener("click",(event)=>{
     let imageUrl = event.target.src;
-    productImageEl.src = imageUrl;
-    console.log(imageUrl);
+    if (imageUrl !== undefined) {
+
+        productImageEl.src = imageUrl;
+
+		}
 })

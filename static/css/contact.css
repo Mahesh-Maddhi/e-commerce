@@ -1,5 +1,26 @@
+
+.contact-section{
+    padding-top: 70px;
+    background-image: url('/static/media/images/contact-us-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+}
+.main-heading{
+    text-align: center;
+    /* text-shadow: 0px 0px 10px rgb(87, 87, 87); */
+    font-size: 25px;
+    font-family: "poppins" !important;
+    font-weight: bold;
+}
 .contact-form{
-    border: 3px solid rgb(152, 152, 152);
+    border: 2px solid #9CC8D6;
     padding: 30px;
     border-radius: 10px;
+    margin-left: auto;
+    margin: 10px auto;
+    max-width: 350px;
+}
+.form-group input, .form-group textarea{
+    background-color: rgba(196, 235, 248,0.1);
 }
