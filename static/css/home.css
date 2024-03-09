@@ -163,8 +163,8 @@
 .landing-bg .main-heading {
 	margin-top: 70px;
 	font-family: "Poppins" !important;
-	font-size: 20px;
-	text-shadow: -5px 5px 5px rgb(110, 110, 110);
+	font-size: clamp(30px, 5vw, 40px);
+	text-shadow: -5px 5px 10px rgb(110, 110, 110);
 	text-align: center;
 	color: #33343d;
 }
@@ -173,10 +173,12 @@
 	margin: 0px auto;
 	width: fit-content;
 	background-color: transparent;
+	border-width: 3px;
+	font-weight: bold;
 }
 
 .landing-bg .passage {
-	font-size: 14px;
+	font-size: clamp(16px,3vw,20px);
 	text-align: center;
 	padding: 10px;
 	/* border: 2px solid #848484; */
@@ -348,14 +350,12 @@
 
 @media screen and (min-width: 768px) {
 	.landing-bg .main-heading {
-		font-size: 25px;
 		width: 50dvw;
 		margin-top: 70px;
 		margin-left: auto;
 	}
 
 	.landing-bg .passage {
-		font-size: 16px;
 		width: 50vw;
 		margin-left: auto;
 	}
@@ -365,6 +365,13 @@
 	.landing-bg {
 		background-image: url("/static/media/images/bg-cart-left.jpg");
 	}
+	.card-container .card {
+		margin: 20px auto;
+	}
+	.category-card:hover .primary-button {
+		opacity: 1;
+	}
+
 }
 
 /* -------------------SHOP----------------- */
@@ -402,6 +409,11 @@ div .services {
 	flex-wrap: wrap;
 	padding: 30px 20px;
 }
+
+.social .icon{
+	font-size: 25px !important;
+}
+
 .social .icon:hover {
 	text-shadow: none;
 }

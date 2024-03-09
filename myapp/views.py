@@ -45,6 +45,7 @@ def search(request):
             query = request.POST.get("query")
             # sending session data to search
             request.session['query'] = query
+           
             return redirect("/search")
     context = {}
         # from Home page categories
@@ -59,7 +60,7 @@ def search(request):
         products = get_data(url)
         context = {"products":products['products']}
         request.session['query'] = None
-    print("SEARCHED")
+    print("SEARCHED", )
     return render(request,"display_products.html",context)
 
 

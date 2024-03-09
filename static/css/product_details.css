@@ -134,6 +134,10 @@
 }
 
 @media screen and (max-width:768px){
+	.product-container{
+		margin: 20px;
+	}
+	
 	.product-details-container{
 		flex-direction: column;
 	}

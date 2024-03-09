@@ -1,9 +1,11 @@
 {% extends "index.html" %} 
 {% load static %} 
 {% block title %}Contact Us{% endblock title %} 
-{% block link_tags %} {{ block.super }}
+{% block linktags %} 
+{{ block.super }}
 <link rel="stylesheet" type="text/css" href="{% static 'css/contact.css' %}" />
-{% endblock link_tags %} {% block main%}
+{% endblock linktags %}
+ {% block main%}
 
 <section class="contact-section">
 	<h1 class="main-heading">Contact Us</h1>

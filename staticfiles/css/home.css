@@ -413,5 +413,6 @@ p a {
 }
 p a:hover {
 	color: #feb50d;
-	/* text-decoration: none; */
+	text-decoration: none;
+	text-shadow: 0px 0px 15px #feb50d;
 }

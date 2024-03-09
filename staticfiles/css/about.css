@@ -1,0 +1,10 @@
+.about-section{
+    padding-top: 70px;
+    background-color: red;
+}
+.policy-card{
+    width: 100%;
+    height: 150px;
+    background-image: url('media/images/emart_policy.png');
+    background-size: cover;
+}

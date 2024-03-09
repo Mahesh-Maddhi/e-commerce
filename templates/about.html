@@ -1,5 +1,60 @@
 {% extends "index.html" %} 
-
+{% load static %}
 {% block title %}About{% endblock title %} 
+{% block linktags %}
+ {{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static 'css/about.css' %}" />
+{% endblock linktags %} 
+{% block main%}
 
-{% block main%}This is about page{% endblock main %}
+<section class="about-section">
+    <div class="banner">
+        <h1 class="main-heading">About Us</h1>
+        <p class="about-para">
+            we strive to be Earth's most customer-centric company,
+             where customers can find and discover anything they might want to buy online.
+        </p>
+
+    </div>
+    
+    <h3 class="policy-section-heading">OUR POLICY</h3>
+    <div class="policy-card-container row">
+        <div class="col-6 col-md-4 col-lg-3 ">
+            <div class="card">
+            <i class="fa-solid fa-truck policy-icon"></i>
+            <h5 class="card-head">FREE DELIVERY</h5>
+            <p class="card-para">For all orders over $100</p>
+            </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 ">
+            <div class="card">
+                
+            <i class="fa-regular fa-credit-card policy-icon"></i>
+            <h5 class="card-head">SAFE PAYMENT</h5>
+            <p class="card-para">100% secure payments</p>
+            </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 ">
+            <div class="card">
+                
+            <i class="fa-solid fa-headset policy-icon"></i>
+            <h5 class="card-head">24/7 HELP CENTER</h5>
+            <p class="card-para">Dedicated 24/7 support</p>
+            </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 ">
+            <div class="card">
+                
+            <i class="fa-solid fa-hand-holding-dollar policy-icon"></i>
+            <h5 class="card-head">FRIENDLY SERVICE</h5>
+            <p class="card-para">30 days satisfaction guarantee</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="customers-section">
+        
+    </div>
+</section>
+
+{% endblock main %}
