@@ -1,7 +1,7 @@
 from django.contrib import admin
-from myapp.models import SignedUser, Contact
+from myapp.models import Contact
 
 # Register your models here.
-admin.site.register(SignedUser)
+
 
 admin.site.register(Contact)

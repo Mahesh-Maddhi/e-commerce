@@ -1,19 +1,18 @@
 
-
 from django.urls import path
 from myapp import views
 
 
 urlpatterns = [
     path('', views.home, name="Home"),
-    path('login/', views.user_login, name="Login"),
-    path('signup/', views.user_signup, name="Signup"),
+    path('login/', views.user_login, name="login"),
+    path('signup/', views.user_signup, name="signup"),
     path('logout/', views.user_logout, name="logout"),
-    path('home/', views.home, name="Home"),
-    path('about/', views.about, name="About"),
-    path('shop/', views.shop, name="Shop"),
-    path('contact/', views.contact, name="Contact"),
+    path('home/', views.home, name="home"),
+    path('about/', views.about, name="about"),
+    path('shop/', views.shop, name="shop"),
+    path('contact/', views.contact, name="contact"),
     path('product-details/', views.product_details, name="Product-details"),
-    path('search/', views.search, name="Search"),
-    path('cart/', views.cart, name="Cart"),
+    path('search/', views.search, name="search"),
+    path('cart/', views.cart, name="cart"),
 ]

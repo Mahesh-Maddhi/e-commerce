@@ -8,8 +8,7 @@
 	<div class="card-container row">
 		{% for product in products %}
 		<div class="co1-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-			<form class="card" method="post">
-				{% csrf_token %}
+			<form class="card" method="get" action="{% url 'Product-details' %}">
 				<div class="product-images">
 					<img
 						src="{{product.thumbnail}}"
@@ -27,7 +26,7 @@
 				</div>
 				<!-- Hidden input fields for form submission -->
 				<input type="hidden" name="product_id" value="{{product.id}}" />
-				<button type="submit" class="primary-button trans" name="form" value="product">Get Details</button>
+				<button type="submit" class="primary-button trans">Get Details</button>
 			</form>
 		</div>
 		{% endfor %}

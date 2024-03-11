@@ -3,7 +3,7 @@ from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
-from myapp.models import SignedUser, Contact
+from myapp.models import Contact
 import requests
 
 # Create your views here.
@@ -32,35 +32,18 @@ def get_categories(api_response):
 
 
 def search(request):
-    if request.method == "POST":
-        # product form
-        if request.POST.get('form') == "product":
-            product_id = request.POST.get('product_id')
-            product_details_data = {"product_id":product_id}
-            #sending session data to product-details
-            request.session['product_details_data'] = product_details_data
-            return redirect('/product-details')
-            # search form
-        elif request.POST.get("form") == "search":
-            query = request.POST.get("query")
-            # sending session data to search
-            request.session['query'] = query
-           
-            return redirect("/search")
     context = {}
-        # from Home page categories
-    if request.session.get('products') is not None:
-        products = request.session.get('products')
-        context = {"products":products}
-        request.session['products'] = None
-    else:
-        # for searching
-        query = request.session.get('query',{})
+    if request.method == "GET":
+        
+        query = request.GET.get("q")
         url = "https://dummyjson.com/products/search?q=" + str(query)
         products = get_data(url)
-        context = {"products":products['products']}
-        request.session['query'] = None
-    print("SEARCHED", )
+        products = products["products"]
+        if len(products) > 0:
+            context = {"products":products}
+            
+    print(context)
+   
     return render(request,"display_products.html",context)
 
 
@@ -92,7 +75,7 @@ def user_signup(request):
         password = request.POST.get("password")
         confirm_password = request.POST.get("confirm-password")
         if password != confirm_password:
-            messages.error(request,"Please enter same password as above!")
+            messages.error(request,"Password does not matched.")
         else:
             if User.objects.filter(username=username).exists():
                 messages.error(request,"Username already taken use another one!")
@@ -115,19 +98,6 @@ def user_logout(request):
 
 
 def home(request):
-    if request.method == "POST":
-        if request.POST.get("form") == "search":
-            query = request.POST.get("query")
-            # sending session data to search
-            request.session['query'] = query
-            return redirect("/search")
-        else:
-            category = request.POST.get('category')
-            url = 'https://dummyjson.com/products/category/'+ str(category)
-            products = get_data(url)
-            # sending session data to shop
-            request.session['products'] = products["products"]
-            return redirect('/search')
     
     products = get_data('https://dummyjson.com/products')
     categories = get_categories(products)
@@ -144,40 +114,38 @@ def home(request):
     
 
 def about(request):
-    if request.POST.get("form") == "search":
-            query = request.POST.get("query")
-            # sending session data to search
-            request.session['query'] = query
-            return redirect("/search")
-    
     return render(request,'about.html')
-    return redirect('/login')
     
 
 def shop(request):
-    
-    if request.method == "POST":
-            # search form
-        if request.POST.get("form") == "search":
-            query = request.POST.get("query")
-            # sending session data to search view
-            request.session['query'] = query
-            return redirect("/search")
-        else:
+
+    context = None
+    if request.method == "GET" and len(request.GET)>0: 
+        form_type = request.GET.get('form')
+        print(request.GET)
+        # category form
+        if form_type == "category":
+            category = request.GET.get('category')
+            url = 'https://dummyjson.com/products/category/'+ str(category)
+            products = get_data(url)
+            context = {"products":products['products']}
+
+        elif form_type == "product":
             # form from product-card
-            product_id = request.POST.get('product_id')
+            product_id = request.GET.get('product_id')
             
             product_details_data = {"product_id":product_id}
             
             #sending session data to product-details
             request.session['product_details_data'] = product_details_data
             return redirect('/product-details')
-    
-    products = get_data('https://dummyjson.com/products')
+    else:
 
-    context = {
-        "products":products['products']
-    }
+        products = get_data('https://dummyjson.com/products')
+
+        context = {
+            "products":products['products']
+        }
 
     
     return render(request,'display_products.html',context)
@@ -187,14 +155,7 @@ def contact(request):
     
     # user contact form
     if request.method == "POST":
-            #search form
-        if request.POST.get("form") == "search":
-            query = request.POST.get("query")
-            # sending session data to search
-            request.session['query'] = query
-            return redirect("/search")
-            # contact form
-        elif request.POST.get("form") == "contact":
+        if request.POST.get("form") == "contact":
             full_name = request.POST.get("full_name")
             email = request.POST.get("email")
             user_message = request.POST.get("user_message")
@@ -211,32 +172,23 @@ def contact(request):
             else:
                 messages.warning(request, "User details already exist!")
 
-    return render(request,'contact.html',{"username":request.user.username})
+    return render(request,'contact.html')
 
     
 def product_details(request):
-    if request.method == "POST":
-        if request.POST.get("form") == "search":
-                query = request.POST.get("query")
-                # sending session data to search
-                request.session['query'] = query
-                return redirect("/search")
 
-    product_details = request.session.get('product_details_data',{})
-    
-    product_id = product_details['product_id']
-    if product_id == None:
-        product_id = 1
+    product_id = 1
+    if request.method == "GET":
+        product_id = request.GET.get('product_id')
+
     url = 'https://dummyjson.com/products/'+ str(product_id)
-
     product = get_data(url)
-    
     context = {"product" : product}
-
     return render(request,'productDetails.html',context)
 
 @login_required
 def cart(request):
+
     products = get_data('https://dummyjson.com/products?limit=3')
     context = {"products":products["products"]}
     return render(request, 'cart.html',context)
