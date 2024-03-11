@@ -1,0 +1,29 @@
+
+.profile-section{
+    margin-top: 60px;
+    height: 100%;
+}
+
+#display-details{
+    height: 60vh;
+    overflow-y: hidden;
+    /* position: absolute; */
+    
+   
+}
+
+#display-details .card-body{
+    min-height: 100%;
+    width: 100%;
+   
+}
+
+
+
+.list-group .list-group-item{
+    color: black;
+}
+
+.list-group .list-group-item:hover{
+    text-decoration: none;
+}

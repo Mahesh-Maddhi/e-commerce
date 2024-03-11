@@ -19,3 +19,9 @@
 .icon-hover-danger:hover i {
   color: #dc4c64 !important;
 }
+
+.recommended .card{
+  height: 350px;
+  aspect-ratio: 6/9;
+  margin: 20px;
+}

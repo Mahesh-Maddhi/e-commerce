@@ -1,0 +1,114 @@
+{% extends "index.html" %}
+{% load static %}
+{% block title %}Profile{% endblock title %}
+{% block linktags %}
+{{ block.super }}
+<link rel="stylesheet" type = "text/css" href="{% static 'css/profile.css' %}"/>
+{% endblock linktags %}
+{% block main %}
+<section class="profile-section">
+    <section class="py-4">
+    <div class="container">
+        <h3 class="text-center">Account</h3>
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="card shadow-none mb-3 mb-lg-0 border">
+                            <div class="card-body">
+                                <div class="list-group list-group-flush">	
+                                    <a href="#account-dashboard" class="list-group-item d-flex justify-content-between align-items-center bg-transparent active">Dashboard <i class="fa-solid fa-gauge-high"></i></a>
+                                    <a href="#account-orders" class="list-group-item d-flex justify-content-between align-items-center bg-transparent">Orders <i class="fa-solid fa-cart-shopping"></i></a>
+                                    <a href="#account-addresses" class="list-group-item d-flex justify-content-between align-items-center bg-transparent">Addresses <i class="fa-solid fa-house-user"></i></a>
+                                    <a href="#account-user-details" class="list-group-item d-flex justify-content-between align-items-center">Account Details <i class="fa-regular fa-user"></i></a>
+                                    {% if user.is_anonymous %}
+                                    <a href="{% url 'login' %}" class="list-group-item d-flex justify-content-between align-items-center bg-transparent">Login <i class="fa-solid fa-arrow-right-to-bracket"></i></a>
+                                    {% else %}
+                                    <a href="{% url 'logout' %}" class="list-group-item d-flex justify-content-between align-items-center bg-transparent">Logout <i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+                                    {% endif %}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--container that shows details-->
+                    <div class="col-lg-8">
+                        <div class="card shadow-none mb-0 border"  id="display-details">
+                            <!--dashboard-->
+                            <div class="card-body" id = "account-dashboard">
+                                <p>Hello <strong>
+                                    {% if user.is_anonymous %}User {% else %}{{user}} {% endif %},</strong> </p>
+                                <p>From your account dashboard you can view your Recent Orders, manage your shipping and billing addesses and edit your password and account details</p>
+                            </div>
+                            <!--Orders-->
+                            <div class="card-body d-flex justify-content-center align-items-center" id = "account-orders">
+                                <p>No orders yet</p>
+                            </div>
+                            <!--Address-->
+                            <div class="card-body" id ="account-addresses">
+								<h6 class="mb-4">The following addresses will be used on the checkuot page by default.</h6>
+                                <div class="row">
+                                    <div class="col-12 col-lg-6">
+                                        <h5 class="mb-3">Billing Addresses</h5>
+                                        <address>
+                                            {{path.user}}<br>
+                                            123 chegunta<br>
+                                            Medak<br>
+                                            Telanagana<br>
+                                            502255<br>
+                                            India
+                                        </address>
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        <h5 class="mb-3">Shipping Addresses</h5>
+                                        <address>
+                                            {{path.user}}<br>
+                                            123 chegunta<br>
+                                            Medak<br>
+                                            Telanagana<br>
+                                            502255<br>
+                                            India
+                                        </address>
+                                    </div>
+                                </div>
+							</div>
+
+
+                            <!--user details form -->
+                            <div class="card-body" id="account-user-details">
+                                <form class="row g-3">
+                                    <div class="col-md-6">
+                                        
+                                    <div class="col-12">
+                                        <label class="form-label">USERNAME</label>
+                                        <input type="text" class="form-control" value="{{request.user}}">
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Email address</label>
+                                        <input type="text" class="form-control" value="{{request.user}}@gmail.com">
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">New Password</label>
+                                        <input type="password" class="form-control" placeholder="Enter password">
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Confirm New Password</label>
+                                        <input type="text" class="form-control" placeholder="confirm password">
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="button" class="btn btn-dark btn-ecomm">Save Changes</button>
+                                    </div>
+                                </form>
+                            </div>
+                            
+
+                        </div>
+                    </div>
+                </div>
+                <!--end row-->
+            </div>
+        </div>
+    </div>
+	</section>
+</section>
+{% endblock main %}

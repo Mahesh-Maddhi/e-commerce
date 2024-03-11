@@ -6,6 +6,7 @@
 
 <div class="products">
 	<div class="card-container row">
+		{% if products %}
 		{% for product in products %}
 		<div class="co1-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
 			<form class="card" method="get" action="{% url 'Product-details' %}">
@@ -30,6 +31,13 @@
 			</form>
 		</div>
 		{% endfor %}
+		{% else %}
+
+		<div class="products-not-found">
+			<h3>Oops!</h3>
+			<p> " {{query}} "  not available.</p>
+		</div>
+		{% endif %}
 	</div>
 </div>
 

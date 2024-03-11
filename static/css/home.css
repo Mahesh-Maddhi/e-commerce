@@ -379,7 +379,15 @@
 .products {
 	padding: 70px 40px;
 }
-
+.products-not-found{
+	height: calc(100vh - 70px);
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
 /* --------------footer------------- */
 .footer {
 	padding: 40px 6px;

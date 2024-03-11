@@ -41,8 +41,8 @@ def search(request):
         products = products["products"]
         if len(products) > 0:
             context = {"products":products}
-            
-    print(context)
+        else:
+            context = {"query":query}
    
     return render(request,"display_products.html",context)
 
@@ -192,3 +192,6 @@ def cart(request):
     products = get_data('https://dummyjson.com/products?limit=3')
     context = {"products":products["products"]}
     return render(request, 'cart.html',context)
+
+def user_profile(request):
+    return render(request,'profile.html')
