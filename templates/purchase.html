@@ -50,7 +50,7 @@
             <p><strong>Offer : </strong> <span class="text-success">- $20.00 </span></p>
             <p><strong>Total : </strong> ${{products.0.price}}</p>
         </div>
-        <div class="text-center"><button class="btn btn-warning text-white">Place Order</button></div>
+        <div class="text-center"><a href = "{% url 'purchase' %}?purchase=make-purchase" class="btn btn-warning text-white">Place Order</a></div>
         
     </div>
 

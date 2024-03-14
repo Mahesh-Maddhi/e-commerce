@@ -234,7 +234,6 @@ def cart(request):
                 cart_item.save()
                 messages.success(request,f"{product_title} Added to Cart Successfully! ")
 
-    # queryset = get_data('https://dummyjson.com/products?limit=3')
     items_queryset = Cart.objects.filter(username = request.user)
     context = {"products":items_queryset}
     return render(request, 'cart.html',context)
@@ -242,11 +241,19 @@ def cart(request):
 def user_profile(request):
     return render(request,'profile.html')
 
-
+@login_required
 def purchase(request):
-    id = request.GET.get('product_id')
-    url = 'https://dummyjson.com/products/'+ str(id)
-    product = get_data(url)
-    product["quantity"] = 1
-    context = {"products" : [product]}
+    if request.method == 'GET':
+        id = request.GET.get('product_id')
+        url = 'https://dummyjson.com/products/'+ str(id)
+        product = get_data(url)
+        product["quantity"] = 1
+        context = {"products" : [product]}
+    if request.GET.get('purchase') == "cart":
+        items_queryset = Cart.objects.filter(username = request.user)
+        context = {"products":items_queryset}
+    elif request.GET.get('purchase') == "make-purchase":
+        messages.success(request,"Order Placed Successfully!")
+        return redirect('/shop')
     return render(request,'purchase.html',context)
+    
