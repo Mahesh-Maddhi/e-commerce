@@ -1,0 +1,40 @@
+
+
+.purchase-section{
+    padding-top: 70px;
+}
+
+.order-summary {
+	max-width: 600px;
+	margin: 40px auto;
+	padding: 20px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background-color: #f9f9f9;
+}
+
+.payment-method label, .payment-method input{
+    cursor: pointer;
+}
+h2 {
+	text-align: center;
+}
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 20px;
+}
+th{
+    background-color: #fdc51c;
+}
+th,
+td {
+	padding: 10px;
+	border-bottom: 1px solid #ddd;
+	text-align: left;
+}
+
+.total {
+	font-weight: bold;
+	text-align: right;
+}

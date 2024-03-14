@@ -1,15 +1,19 @@
-{% extends "base.html" %} 
+{% extends "index.html" %} 
 {% load static %}
 {% block title %}User Register{% endblock title %} 
 {% block linktags %}<link href="{%static 'css/signup.css'%}" rel="stylesheet">{% endblock linktags %}
-{% block body%}
+{% block script_tags %}
+{{ block.super }}
+<script type="text/javascript" src="{% static 'js/signup.js' %}"></script>
+{% endblock script_tags %}
+{% block main%}
 	<div class="login-page">
   <div class="form">
     <h1 class="heading"><img class ="logo" src="{% static "media/images/Emart-logo.png" %}"/></h1>
     
     <form class="login-form" method="post">
       {% csrf_token %}
-      <input type="text" placeholder="Username" name = "username" required/>
+      <input type="text" placeholder="Username" name = "username" required autofocus/>
       <input type="email" placeholder="user@gmail.com" name = "email" required/>
       <input type="text" placeholder="Enter Password" name="confirm-password" minlength = "8" required/>
       <div class="password-container">
@@ -22,4 +26,4 @@
     </form>
   </div>
 </div>
-{% endblock body %}
+{% endblock main %}

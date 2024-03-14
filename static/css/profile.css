@@ -7,7 +7,6 @@
 #display-details{
     height: 60vh;
     overflow-y: hidden;
-    /* position: absolute; */
     
    
 }
@@ -18,8 +17,6 @@
    
 }
 
-
-
 .list-group .list-group-item{
     color: black;
 }
@@ -27,3 +24,4 @@
 .list-group .list-group-item:hover{
     text-decoration: none;
 }
+

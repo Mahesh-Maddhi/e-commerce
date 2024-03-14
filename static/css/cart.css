@@ -25,3 +25,51 @@
   aspect-ratio: 6/9;
   margin: 20px;
 }
+
+input[type=number] {
+  -moz-appearance: textfield; /* Firefox */
+  appearance: textfield; /* Others */
+}
+
+/* Hide the spin buttons for WebKit browsers */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.qty-buttons{
+  padding: 5px 10px;
+  margin-top: 15px;
+  border: 1px solid rgb(220, 220, 220);
+  cursor: pointer;
+  user-select: none;
+}
+
+.qty-buttons:active{
+  transform: scale(0.9);
+  background-color: rgb(193, 193, 193);
+  color: white;
+}
+.no-items-div{
+  min-height:200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgb(114, 114, 114);
+  border-radius: 8px;
+}
+
+.remove-btn{
+  margin-top:14px;
+}
+.card-img-top{
+  height: 150px;
+}
+.product-title{
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  max-width: 100%;
+}

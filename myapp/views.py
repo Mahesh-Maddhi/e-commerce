@@ -3,8 +3,10 @@ from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
-from myapp.models import Contact
+from myapp.models import Contact, Cart
 import requests
+import json
+from django.core.serializers import serialize
 
 # Create your views here.
 
@@ -122,7 +124,7 @@ def shop(request):
     context = None
     if request.method == "GET" and len(request.GET)>0: 
         form_type = request.GET.get('form')
-        print(request.GET)
+        
         # category form
         if form_type == "category":
             category = request.GET.get('category')
@@ -158,7 +160,7 @@ def contact(request):
         if request.POST.get("form") == "contact":
             full_name = request.POST.get("full_name")
             email = request.POST.get("email")
-            user_message = request.POST.get("user_message")
+            user_message = request.POST.get("message")
             user_exist = Contact.objects.filter(email=email).exists()
 
             if not user_exist:
@@ -176,7 +178,6 @@ def contact(request):
 
     
 def product_details(request):
-
     product_id = 1
     if request.method == "GET":
         product_id = request.GET.get('product_id')
@@ -188,10 +189,64 @@ def product_details(request):
 
 @login_required
 def cart(request):
+    if request.method == "POST":
+        form_type = request.POST.get('form')
+        
+        print(form_type)
+        if form_type == 'buy':
+            id = request.POST.get('product-id')
+            return redirect(f'/purchase?product_id={id}')
+        elif form_type == 'delete':
+             id = request.POST.get('product-id')
+             if Cart.objects.filter(product_id = id).exists():
+                cart_product = Cart.objects.get(product_id = id)
+                cart_product.delete()
+        elif form_type == 'add-to-cart':
+            id = request.POST.get('product-id')
+            
+            
+            if Cart.objects.filter(product_id = id).exists():
+                # messages.success(request,"Item Is Already In The Cart")
+                pass
+            # adding items to cart
+            else:
+                product = get_data('https://dummyjson.com/products/'+ str(id))
+                product_id = product['id']
+                product_title = product['title']
+                product_thumbnail = product['thumbnail']
+                product_brand = product['brand']
+                product_price = product['price']
+                quantity = 1
 
-    products = get_data('https://dummyjson.com/products?limit=3')
-    context = {"products":products["products"]}
+                try:
+                    user = User.objects.get(username=request.user)
+                except User.DoesNotExist:
+                    return redirect('/login')
+                    
+                cart_item = Cart(product_id = product_id,
+                                 username = user, 
+                                 title = product_title, 
+                                 thumbnail = product_thumbnail,
+                                 brand = product_brand,
+                                 price = product_price,
+                                 quantity = quantity )
+                
+                cart_item.save()
+                messages.success(request,f"{product_title} Added to Cart Successfully! ")
+
+    # queryset = get_data('https://dummyjson.com/products?limit=3')
+    items_queryset = Cart.objects.filter(username = request.user)
+    context = {"products":items_queryset}
     return render(request, 'cart.html',context)
 
 def user_profile(request):
     return render(request,'profile.html')
+
+
+def purchase(request):
+    id = request.GET.get('product_id')
+    url = 'https://dummyjson.com/products/'+ str(id)
+    product = get_data(url)
+    product["quantity"] = 1
+    context = {"products" : [product]}
+    return render(request,'purchase.html',context)

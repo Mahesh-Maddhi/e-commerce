@@ -1,0 +1,61 @@
+{% extends "index.html" %}
+{% load static %}
+{% block title %}Purchase{% endblock title %}
+
+{% block linktags %}
+{{ block.super}}
+<link rel="stylesheet" type="text/css" href="{% static 'css/purchase.css' %}" />
+{% endblock linktags %}
+{% block main %}
+
+<section class="purchase-section">
+   
+    <div class="order-summary shadow">
+        <h2>Order Summary</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{product.title}}</td>
+                    <td>${{product.price}}</td>
+                    <td class="text-center">{{product.quantity}}</td>
+                    <td>${{product.price}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="payment-method">
+            <p><strong>Select Payment Method:</strong></p>
+            <input type="radio" id="debit_card" name="payment_method" value="debit_card" checked>
+            <label for="debit_card">Debit Card</label><br>
+            <input type="radio" id="credit_card" name="payment_method" value="credit_card">
+            <label for="credit_card">Credit Card</label><br>
+            <input type="radio" id="paypal" name="payment_method" value="paypal">
+            <label for="paypal">PayPal</label><br>
+            <input type="radio" id="upi" name="payment_method" value="upi">
+            <label for="upi">UPI</label><br>
+            <!-- Add more payment options if needed -->
+        </div>
+        <div class="total">
+            <p><strong>Subtotal : </strong> ${{products.0.price}}</p>
+            <p><strong>Shipping : </strong> $20.00</p>
+            <p><strong>Offer : </strong> <span class="text-success">- $20.00 </span></p>
+            <p><strong>Total : </strong> ${{products.0.price}}</p>
+        </div>
+        <div class="text-center"><button class="btn btn-warning text-white">Place Order</button></div>
+        
+    </div>
+
+</section>
+
+
+
+{% endblock main %}

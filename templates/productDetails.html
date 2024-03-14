@@ -16,7 +16,8 @@
 {% block main%}
 
 <section class="product-section">
-    <div id="product-container">
+    <form id="product-container" method="post" action="{% url 'cart' %}">
+        {% csrf_token %}
         <div class="product-details-container">
             <div class="image-container">
                 <img id="product-image" src="{{product.thumbnail}}" alt="product.title">
@@ -24,7 +25,6 @@
                     <!-- Added more image elements here for the gallery -->
                     {% for image_url in product.images %}
                     <img src="{{image_url}}" alt="">
-                    
                     {% endfor %}
                 </div>
             </div>
@@ -45,12 +45,13 @@
             <p>{{product.description}}</p>
             
         </div> 
+        <input type="hidden" name="product-id" value="{{product.id}}" />
         <div id="add-to-cart">
-            <button>Buy Now</button>
-            <button>Add to Cart</button>
+            <button type="submit" name="form" value="buy">Buy Now</button>
+            <button type="submit" name="form" value="add-to-cart">Add to Cart</button>
         </div>
 
-    </div>
+    </form>
 </section>
 
 {% endblock main %}
