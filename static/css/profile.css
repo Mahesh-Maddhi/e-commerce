@@ -23,5 +23,6 @@
 
 .list-group .list-group-item:hover{
     text-decoration: none;
+    color: #007bff;
 }
 

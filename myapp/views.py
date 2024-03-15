@@ -18,6 +18,7 @@ def get_data(url):
     
 def add_total_price(items_queryset):
     items_list = list(items_queryset)
+
     total_cost = 0
     for item in items_list:
         item.total_price = int(item.price) * item.quantity
@@ -243,12 +244,13 @@ def user_profile(request):
 
 @login_required
 def purchase(request):
-    if request.method == 'GET':
+    if request.GET.get('purchase') == None:
         id = request.GET.get('product_id')
         url = 'https://dummyjson.com/products/'+ str(id)
         product = get_data(url)
         product["quantity"] = 1
-        context = {"products" : [product]}
+        product['total_price'] = product['price']
+        context = {"products":[product], "total_cost":product['total_price']}
     if request.GET.get('purchase') == "cart":
         items_queryset = Cart.objects.filter(username = request.user)
         context = add_total_price(items_queryset)
