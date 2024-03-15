@@ -37,13 +37,13 @@
                                 </div>
                                 <div class="col-lg-4 col-sm-12 col-12 d-flex flex-row flex-lg-column flex-xl-row text-nowrap align-items-center">
                                     <div class="d-flex align-items-center justify-content-center">
-                                        <p class="qty-buttons" onclick="decrement('{{ product.product_id }}')">-</p>
-                                        <input onkeydown="preventEnterSubmit(event)" id="quantity_{{ product.product_id }}" type="number" value="{{ product.quantity }}" class="form-control" min="1">
-                                        <p class="qty-buttons" onclick="increment('{{ product.product_id }}')">+</p>
+                                        <button class="qty-buttons" onclick="decrement('{{ product.product_id }}')" type="submit"  name="form" value="update">-</button>
+                                        <input onkeydown="preventEnterSubmit(event)" id="quantity_{{ product.product_id }}" type="number" value="{{ product.quantity }}" name="quantity" class="form-control" min="1">
+                                        <button class="qty-buttons" onclick="increment('{{ product.product_id }}')" type="submit" name="form" value="update">+</button>
                                     </div>
                                     <div class="price ml-3">
-                                        $ <text class="h6" id="price_{{ product.product_id }}" >{{product.price}}</text> <br />
-                                         <small class="text-muted text-nowrap"  id="pricePerItem_{{ product.product_id }}">{{product.price}}  </small>/ per item
+                                        $ <text class="h6" id="price_{{ product.product_id }}" >{{product.total_price}}</text> <br />
+                                         <small class="text-muted text-nowrap"  id="pricePerItem_{{ product.product_id }}">{{product.price}}  </small> <small>/ per item </small>
                                     </div>
                                 </div>
                                 <input type = "hidden" name="product-id" value = "{{product.product_id}}"/>
@@ -96,20 +96,20 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
                                 <p class="mb-2">Total price:</p>
-                                <p class="mb-2">$329.00</p>
+                                <p class="mb-2">${{total_cost}}</p>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <p class="mb-2">Discount:</p>
-                                <p class="mb-2 text-success">-$60.00</p>
+                                <p class="mb-2 text-success">-$20.00</p>
                             </div>
                             <div class="d-flex justify-content-between">
-                                <p class="mb-2">TAX:</p>
-                                <p class="mb-2">$14.00</p>
+                                <p class="mb-2">Shipping:</p>
+                                <p class="mb-2">$20.00</p>
                             </div>
                             <hr />
                             <div class="d-flex justify-content-between">
                                 <p class="mb-2">Total price:</p>
-                                <p class="mb-2 fw-bold">$283.00</p>
+                                <p class="mb-2 fw-bold">${{total_cost}}</p>
                             </div>
 
                             <div class="mt-3">

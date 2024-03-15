@@ -5,8 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from myapp.models import Contact, Cart
 import requests
-import json
-from django.core.serializers import serialize
+
 
 # Create your views here.
 
@@ -17,6 +16,14 @@ def get_data(url):
     else:
         return {"error occured while api fetch with status code":response.status_code}
     
+def add_total_price(items_queryset):
+    items_list = list(items_queryset)
+    total_cost = 0
+    for item in items_list:
+        item.total_price = int(item.price) * item.quantity
+        total_cost += int(item.price) * item.quantity
+    return {"products":items_list,"total_cost":total_cost}
+
 
 def get_categories(api_response):
 
@@ -36,7 +43,6 @@ def get_categories(api_response):
 def search(request):
     context = {}
     if request.method == "GET":
-        
         query = request.GET.get("q")
         url = "https://dummyjson.com/products/search?q=" + str(query)
         products = get_data(url)
@@ -120,36 +126,19 @@ def about(request):
     
 
 def shop(request):
-
-    context = None
-    if request.method == "GET" and len(request.GET)>0: 
-        form_type = request.GET.get('form')
-        
-        # category form
-        if form_type == "category":
-            category = request.GET.get('category')
-            url = 'https://dummyjson.com/products/category/'+ str(category)
-            products = get_data(url)
-            context = {"products":products['products']}
-
-        elif form_type == "product":
-            # form from product-card
-            product_id = request.GET.get('product_id')
-            
-            product_details_data = {"product_id":product_id}
-            
-            #sending session data to product-details
-            request.session['product_details_data'] = product_details_data
-            return redirect('/product-details')
+        # For Specific Categoy
+    if request.GET.get('category') != None: 
+        category = request.GET.get('category')
+        url = 'https://dummyjson.com/products/category/'+ str(category)
+        products = get_data(url)
+        context = {"products":products['products']}
     else:
-
+        # For all products
         products = get_data('https://dummyjson.com/products')
-
         context = {
             "products":products['products']
         }
 
-    
     return render(request,'display_products.html',context)
     
 
@@ -173,7 +162,6 @@ def contact(request):
 
             else:
                 messages.warning(request, "User details already exist!")
-
     return render(request,'contact.html')
 
     
@@ -191,7 +179,6 @@ def product_details(request):
 def cart(request):
     if request.method == "POST":
         form_type = request.POST.get('form')
-        
         print(form_type)
         if form_type == 'buy':
             id = request.POST.get('product-id')
@@ -201,6 +188,17 @@ def cart(request):
              if Cart.objects.filter(product_id = id).exists():
                 cart_product = Cart.objects.get(product_id = id)
                 cart_product.delete()
+            # to update quantity
+        elif form_type == 'update':
+            id = request.POST.get('product-id')
+            updated_quantity = request.POST.get('quantity')
+            updated_quantity = int(updated_quantity)
+
+            if Cart.objects.filter(product_id = id).exists():
+                cart_product = Cart.objects.get(product_id = id)
+                cart_product.quantity = updated_quantity
+                cart_product.save()
+
         elif form_type == 'add-to-cart':
             id = request.POST.get('product-id')
             
@@ -208,6 +206,7 @@ def cart(request):
             if Cart.objects.filter(product_id = id).exists():
                 # messages.success(request,"Item Is Already In The Cart")
                 pass
+
             # adding items to cart
             else:
                 product = get_data('https://dummyjson.com/products/'+ str(id))
@@ -235,7 +234,8 @@ def cart(request):
                 messages.success(request,f"{product_title} Added to Cart Successfully! ")
 
     items_queryset = Cart.objects.filter(username = request.user)
-    context = {"products":items_queryset}
+    # to calculate total cost and price details 
+    context = add_total_price(items_queryset)
     return render(request, 'cart.html',context)
 
 def user_profile(request):
@@ -251,7 +251,7 @@ def purchase(request):
         context = {"products" : [product]}
     if request.GET.get('purchase') == "cart":
         items_queryset = Cart.objects.filter(username = request.user)
-        context = {"products":items_queryset}
+        context = add_total_price(items_queryset)
     elif request.GET.get('purchase') == "make-purchase":
         messages.success(request,"Order Placed Successfully!")
         return redirect('/shop')

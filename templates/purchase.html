@@ -27,7 +27,7 @@
                     <td>{{product.title}}</td>
                     <td>${{product.price}}</td>
                     <td class="text-center">{{product.quantity}}</td>
-                    <td>${{product.price}}</td>
+                    <td>${{product.total_price}}</td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -45,10 +45,10 @@
             <!-- Add more payment options if needed -->
         </div>
         <div class="total">
-            <p><strong>Subtotal : </strong> ${{products.0.price}}</p>
+            <p><strong>Subtotal : </strong> ${{total_cost}}</p>
             <p><strong>Shipping : </strong> $20.00</p>
-            <p><strong>Offer : </strong> <span class="text-success">- $20.00 </span></p>
-            <p><strong>Total : </strong> ${{products.0.price}}</p>
+            <p><strong>Discount : </strong> <span class="text-success">- $20.00 </span></p>
+            <p><strong>Total : </strong> ${{total_cost}}</p>
         </div>
         <div class="text-center"><a href = "{% url 'purchase' %}?purchase=make-purchase" class="btn btn-warning text-white">Place Order</a></div>
         
