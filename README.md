@@ -15,12 +15,13 @@
 <summary>Click to view</summary>
 
 <br/>
-    1. Clone the repository:
 
-    ```bash
+1. Clone the repository:
+
+   ```bash
     git clone https://github.com/Mahesh-Maddhi/e-commerce.git
-    ```
-    2. Navigate into the project root directory:
+   ```
+2. Navigate into the project root directory:
 
     ```bash
     cd emart
