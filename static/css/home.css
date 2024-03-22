@@ -437,6 +437,12 @@ address .line {
 	display: flex;
 	/* align-items: center; */
 	justify-content: flex-start;
+	text-decoration: none;
+	color: white;
+}
+.line:hover{
+	color:#ffc61c;
+	text-decoration: none;
 }
 
 .line i {
