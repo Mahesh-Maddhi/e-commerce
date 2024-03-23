@@ -20,8 +20,6 @@ from django.urls import path , include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from django.views.static import serve
-from django.conf.urls import url
 
 # to change the admin site headers
 admin.site.site_header = "EMART Admin"
@@ -31,7 +29,6 @@ admin.site.index_title = "Welcome to EMART Portal"
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('myapp.urls')),
-    url(r'^static/(?p<path>.*)$', serve,{'document_root':settings.STATIC_ROOT})
 ]
 
 # Serve static files during development
