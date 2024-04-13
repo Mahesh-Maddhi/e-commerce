@@ -21,11 +21,12 @@
    ```bash
     git clone https://github.com/Mahesh-Maddhi/e-commerce.git
    ```
+
 2. Navigate into the project root directory:
 
-    ```bash
-    cd emart
-    ```
+   ```bash
+   cd emart
+   ```
 
 3. Create a virtual environment:
 
@@ -44,17 +45,7 @@
    b. For windows Terminal
 
    ```bash
-   cd venv/Scripts
-   ```
-
-   ```bash
-   .\acivate
-   ```
-
-   c. navigate back to project root directory
-
-   ```bash
-   cd ../..
+   venv\Scripts\activate
    ```
 
 5. Install dependencies:
@@ -88,6 +79,7 @@
 - Place order: Go to the cart page and click 'Place Order' to finalize your order.
 
 ### previews
+
 <details>
 <summary>Click to View</summary>
 
@@ -121,8 +113,6 @@
 <img src="static/media/images/preview/ecommerce-mobile-preview.png" alt="" width="400" height="500">
 
 </details>
-
-
 
 ### Responsive Design with Media Queries
 
