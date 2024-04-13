@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-q1l=nilamfd%n*+1yj62f)0rte(a7w^4xkepa25j@2!2n=qjbb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','192.168.0.103','localhost']
+ALLOWED_HOSTS = ['127.0.0.1','192.168.0.103','localhost','MaheshMaddhi.pythonanywhere.com','.vercel.app']
 
 
 # Application definition
@@ -142,3 +142,9 @@ LOGIN_URL = '/login/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+PROXIES = {
+    'http': 'http://localhost:8000',
+    'https': 'https://dummyjson.com:443',
+}
+

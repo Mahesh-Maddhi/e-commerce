@@ -1,0 +1,66 @@
+.about-section{
+    padding-top: 50px;
+}
+.banner{
+    width: 100%;
+    height: clamp(350px, 30vh, 500px);
+    background-image: url("/static/media/images/bg-about-banner.61ca250fef6a.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.about-section .main-heading{
+    color: white;
+    font-size: clamp(30px, 7vw,50px ) ;
+}
+.about-para{
+    color: white;
+    width: 50%;
+    font-weight: bold;
+    background-color: rgba(119, 119, 119, 0.3);
+    padding: 20px;
+    border-radius: 20px;
+}
+.policy-card-container{
+    width: 100%;
+
+}
+.policy-section-heading{
+    font-weight: bold;
+    text-align: center;
+    margin: 20px 0px;
+    text-shadow: 0px 0px 15px rgb(189, 189, 189);
+}
+.policy-card-container div .card{
+    height: 250px;
+    margin: 20px 10px;
+    padding: 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0px 0px 10px #cecece;
+
+}
+
+
+.card .policy-icon{
+    color: rgb(98, 98, 98);
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+.card:hover .policy-icon{
+    color: #ffc61c;
+    /* text-shadow: 0px 0px 20px #ffc61c; */
+
+}
+
+.policy-card-container div .card:hover{
+    box-shadow: 0px 0px 10px #ffc61c;
+
+}

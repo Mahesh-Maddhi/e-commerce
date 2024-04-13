@@ -22,10 +22,12 @@
 	background-color: #f5f5f5;
 }
 
-
 .messages {
 	list-style-type: none;
 	padding-left: 0px;
+}
+.modal-content {
+	box-shadow: 0px 0px 1000px 70px rgb(122, 122, 122);
 }
 .modal-header .modal-close-button {
 	outline: none;
@@ -108,11 +110,11 @@
 	z-index: 1030;
 }
 
-.search-bar .icon{
+.search-bar .icon {
 	position: absolute;
 	right: 30px;
 	top: 23px;
-	color: #FEB50D;
+	color: #feb50d;
 	cursor: pointer;
 }
 .profile-icons {
@@ -163,8 +165,8 @@
 .landing-bg .main-heading {
 	margin-top: 70px;
 	font-family: "Poppins" !important;
-	font-size: 20px;
-	text-shadow: -5px 5px 5px rgb(110, 110, 110);
+	font-size: clamp(30px, 5vw, 40px);
+	text-shadow: -5px 5px 10px rgb(110, 110, 110);
 	text-align: center;
 	color: #33343d;
 }
@@ -173,10 +175,12 @@
 	margin: 0px auto;
 	width: fit-content;
 	background-color: transparent;
+	border-width: 3px;
+	font-weight: bold;
 }
 
 .landing-bg .passage {
-	font-size: 14px;
+	font-size: clamp(16px, 3vw, 20px);
 	text-align: center;
 	padding: 10px;
 	/* border: 2px solid #848484; */
@@ -215,7 +219,7 @@
 	transition: opacity 0.3s ease-in-out;
 }
 
-.category-card:hover{
+.category-card:hover {
 	box-shadow: 0px 0px 20px #feb50d;
 }
 .category-name {
@@ -237,7 +241,6 @@
 .category-card:hover .primary-button {
 	opacity: 1;
 	transition: opacity 0.3s ease-in-out;
-
 }
 
 .card-container {
@@ -270,17 +273,13 @@
 	transform: scale(1.02);
 	box-shadow: 0px 0px 20px#FEB50D;
 }
-/* .product-images:hover .product-image {
-    scale: 1.1;
-	
-} */
+
 
 .card .product-image {
 	width: 100%;
 	aspect-ratio: 4/5;
 	object-fit: cover;
 	border-radius: 1rem 1rem 0px 0px;
-	/* mix-blend-mode:color-burn; */
 }
 .product-images {
 	overflow: hidden;
@@ -324,7 +323,7 @@
 	border: 2px solid white;
 	text-decoration: none;
 }
-.primary-button:active{
+.primary-button:active {
 	outline: none;
 }
 
@@ -348,14 +347,12 @@
 
 @media screen and (min-width: 768px) {
 	.landing-bg .main-heading {
-		font-size: 25px;
 		width: 50dvw;
 		margin-top: 70px;
 		margin-left: auto;
 	}
 
 	.landing-bg .passage {
-		font-size: 16px;
 		width: 50vw;
 		margin-left: auto;
 	}
@@ -365,6 +362,12 @@
 	.landing-bg {
 		background-image: url("/static/media/images/bg-cart-left.jpg");
 	}
+	.card-container .card {
+		margin: 20px auto;
+	}
+	.category-card:hover .primary-button {
+		opacity: 1;
+	}
 }
 
 /* -------------------SHOP----------------- */
@@ -372,7 +375,15 @@
 .products {
 	padding: 70px 40px;
 }
-
+.products-not-found {
+	height: calc(100vh - 70px);
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
 /* --------------footer------------- */
 .footer {
 	padding: 40px 6px;
@@ -402,6 +413,11 @@ div .services {
 	flex-wrap: wrap;
 	padding: 30px 20px;
 }
+
+.social .icon {
+	font-size: 25px !important;
+}
+
 .social .icon:hover {
 	text-shadow: none;
 }
@@ -415,4 +431,20 @@ p a:hover {
 	color: #feb50d;
 	text-decoration: none;
 	text-shadow: 0px 0px 15px #feb50d;
+}
+
+address .line {
+	display: flex;
+	/* align-items: center; */
+	justify-content: flex-start;
+	text-decoration: none;
+	color: white;
+}
+.line:hover{
+	color:#ffc61c;
+	text-decoration: none;
+}
+
+.line i {
+	margin: 5px 10px 10px 0px;
 }

@@ -5,6 +5,7 @@
     background-size: cover;
     background-position: center;
     width: 100%;
+    min-height: 100vh;
 }
 .main-heading{
     text-align: center;
@@ -20,7 +21,12 @@
     margin-left: auto;
     margin: 10px auto;
     max-width: 350px;
+    box-shadow: 0px 0px 10px rgb(154, 154, 154);
 }
 .form-group input, .form-group textarea{
     background-color: rgba(196, 235, 248,0.1);
+}
+
+.form-group label{
+    font-weight: 500;
 }

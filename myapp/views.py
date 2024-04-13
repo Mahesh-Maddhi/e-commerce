@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
 from myapp.models import Contact, Cart
+from django.conf import settings
 import requests
 
 
@@ -11,10 +12,11 @@ import requests
 
 def get_data(url):
     response = requests.get(url)
+    response.raise_for_status()
     if response.status_code == 200:
         return response.json()
     else:
-        return {"error occured while api fetch with status code":response.status_code}
+        return { "message" :f"error occured while api fetch with status code:{response.status_code}"}
     
 def add_total_price(items_queryset):
     items_list = list(items_queryset)
@@ -110,8 +112,6 @@ def home(request):
     
     products = get_data('https://dummyjson.com/products')
     categories = get_categories(products)
-    
-    
     context={
         "username":request.user.username,
         "products":products["products"],
@@ -123,6 +123,7 @@ def home(request):
     
 
 def about(request):
+
     return render(request,'about.html')
     
 
@@ -180,7 +181,6 @@ def product_details(request):
 def cart(request):
     if request.method == "POST":
         form_type = request.POST.get('form')
-        print(form_type)
         if form_type == 'buy':
             id = request.POST.get('product-id')
             return redirect(f'/purchase?product_id={id}')
